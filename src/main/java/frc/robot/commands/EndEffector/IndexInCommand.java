@@ -6,11 +6,12 @@ package frc.robot.commands.EndEffector;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.EndEffector;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class IndexInCommand extends Command {
+public class IndexInCommand extends LoggedCommand {
   /** Creates a new EndEffectorCommand. */
 
   EndEffector m_endEffector;
@@ -31,6 +32,7 @@ public class IndexInCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     m_endEffector.maintainPosition();
     maintaining = true;
   }
@@ -66,7 +68,7 @@ public class IndexInCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     m_endEffector.setPlacementMotor(0);
-
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

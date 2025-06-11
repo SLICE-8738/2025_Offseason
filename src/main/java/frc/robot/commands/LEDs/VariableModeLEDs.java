@@ -2,11 +2,12 @@ package frc.robot.commands.LEDs;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.LEDs.LEDMode;
 
-public class VariableModeLEDs extends Command {
+public class VariableModeLEDs extends LoggedCommand {
     private final LEDs m_leds;
     private int m_rainbowFirstPixelHue = 0;
 
@@ -28,11 +29,15 @@ public class VariableModeLEDs extends Command {
 
     @Override
     public void initialize() {
+
+      super.initialize();
+
       m_leds.setAll(Color.kBlack);
 
       timer.reset();
       timer.start();
       on = false;
+
     }
 
     @Override
@@ -84,6 +89,7 @@ public class VariableModeLEDs extends Command {
     @Override
     public void end(boolean interrupted) {
       m_leds.setAll(Color.kBlack);
+      super.end(interrupted);
     }
 
     // Returns true when the command should end.

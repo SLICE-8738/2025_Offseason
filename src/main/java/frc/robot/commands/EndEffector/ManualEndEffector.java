@@ -6,11 +6,12 @@ package frc.robot.commands.EndEffector;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.EndEffector;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ManualEndEffector extends Command {
+public class ManualEndEffector extends LoggedCommand {
   /** Creates a new ManualEndEffector. */
   private final EndEffector m_endEffector;
   private final GenericHID m_controller;
@@ -27,6 +28,7 @@ public class ManualEndEffector extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     m_endEffector.resetRelativeEncoder();
     maintaining = false;
   }
@@ -55,6 +57,7 @@ public class ManualEndEffector extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

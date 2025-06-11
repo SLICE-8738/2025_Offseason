@@ -4,11 +4,11 @@
 
 package frc.robot.commands.Elevator;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.Elevator;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ElevatorToProcessor extends Command {
+public class ElevatorToProcessor extends LoggedCommand {
   private final Elevator m_elevator;
 
   /** Creates a new ElevatorToProcessor. */
@@ -21,6 +21,7 @@ public class ElevatorToProcessor extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,6 +34,7 @@ public class ElevatorToProcessor extends Command {
   @Override
   public void end(boolean interrupted) {
     m_elevator.set(0);
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

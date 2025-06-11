@@ -1,4 +1,4 @@
-package frc.slicelibs.config;
+package frc.lib.config;
 
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;

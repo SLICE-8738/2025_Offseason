@@ -1,10 +1,11 @@
 package frc.robot.commands.LEDs;
 
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.LEDs;
 
-public class CustomRainbowLEDs extends Command {
+public class CustomRainbowLEDs extends LoggedCommand {
     private final LEDs leds;
     private int m_rainbowFirstPixelHue = 0;
     private int range = 20;
@@ -15,11 +16,12 @@ public class CustomRainbowLEDs extends Command {
       color = hue;
 
       // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(leds);
+      addRequirements(leds);
     }
 
     @Override
     public void initialize() {
+      super.initialize();
       leds.setAll(Color.kBlack);
     }
 
@@ -40,6 +42,7 @@ public class CustomRainbowLEDs extends Command {
     @Override
     public void end(boolean interrupted) {
       leds.setAll(Color.kBlack);
+      super.end(interrupted);
     }
 
     // Returns true when the command should end.

@@ -1,15 +1,15 @@
 package frc.robot.commands.Elevator;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
+import frc.lib.LoggedCommand;
 import frc.robot.Constants.kElevator;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 
-public class MoveElevatorToLevel extends Command {
+public class MoveElevatorToLevel extends LoggedCommand {
     private final Elevator m_elevator;
     private final double m_elevatorThreshold;
     private double m_level;
@@ -27,6 +27,9 @@ public class MoveElevatorToLevel extends Command {
     }
 
     public void initialize() {
+        
+        super.initialize();
+        
         switch (m_levelType) {
             case SOURCE:
                 m_level = Elevator.getSourceLevel().height;
@@ -42,6 +45,7 @@ public class MoveElevatorToLevel extends Command {
         if (m_level > m_elevator.getPositions()[0]) {
             movementDirection = true;
         }
+
     }
 
     public void execute() {
@@ -65,8 +69,9 @@ public class MoveElevatorToLevel extends Command {
         }
     }
 
-    public void end() {
-        m_elevator.set(0);
+    public void end(boolean interrupted) {
+        // m_elevator.set(0);
+        super.end(interrupted);
     }
 
     public boolean isFinished() {

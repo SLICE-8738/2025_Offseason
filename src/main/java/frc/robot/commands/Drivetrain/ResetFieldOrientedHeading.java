@@ -4,10 +4,11 @@
 
 package frc.robot.commands.Drivetrain;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
-public class ResetFieldOrientedHeading extends Command {
+public class ResetFieldOrientedHeading extends LoggedCommand {
+
   private final Drivetrain m_drivetrain;
 
   /** Creates a new ResetFieldOrientedHeading. */
@@ -20,6 +21,7 @@ public class ResetFieldOrientedHeading extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     m_drivetrain.resetFieldOrientedHeading();
   }
 
@@ -29,7 +31,9 @@ public class ResetFieldOrientedHeading extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    super.end(interrupted);
+  }
 
   // Returns true when the command should end.
   @Override

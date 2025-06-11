@@ -1,11 +1,12 @@
 package frc.robot.commands.LEDs;
 
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.lib.LoggedCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.LEDs;
 
-public class RainbowLEDs extends Command {
+public class RainbowLEDs extends LoggedCommand {
     private final LEDs leds;
     private int m_rainbowFirstPixelHue = 0;
     
@@ -18,6 +19,7 @@ public class RainbowLEDs extends Command {
 
     @Override
     public void initialize() {
+      super.initialize();
       leds.setAll(Color.kBlack);
     }
 
@@ -38,6 +40,7 @@ public class RainbowLEDs extends Command {
     @Override
     public void end(boolean interrupted) {
       leds.setAll(Color.kBlack);
+      super.end(interrupted);
     }
 
     // Returns true when the command should end.

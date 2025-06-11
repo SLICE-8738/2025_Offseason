@@ -21,8 +21,8 @@ import frc.robot.Constants.kField.AlignPosition;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 import frc.robot.LimelightHelpers;
-import frc.robot.commands.Drivetrain.PoseAlignCommand;
-import frc.robot.commands.Drivetrain.SetAligningWithReefCommand;
+import frc.robot.commands.Drivetrain.PoseAlign;
+import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
 import frc.robot.commands.Elevator.ManualElevator;
 import frc.robot.commands.EndEffector.IndexAlignCommand;
 import frc.robot.commands.EndEffector.IndexInCommand;
@@ -42,7 +42,7 @@ public class AlignAndScoreCoralAutonomous extends SequentialCommandGroup {
 
     int targetTagID = DriverStation.getAlliance().get() == Alliance.Blue ? position.blueAprilTagID
         : position.redAprilTagID;
-    PoseAlignCommand alignWithReef = new PoseAlignCommand(
+    PoseAlign alignWithReef = new PoseAlign(
         drivetrain,
         position.fieldPosition.plus(new Transform2d(
             new Translation2d(
@@ -54,7 +54,7 @@ public class AlignAndScoreCoralAutonomous extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new SetAligningWithReefCommand(drivetrain, true),
+        new UpdateAligningWithReef(drivetrain, true),
         new ParallelCommandGroup(
             new ParallelDeadlineGroup(
                 new SequentialCommandGroup(new IndexInCommand(endEffector, null), new IndexAlignCommand(endEffector)), 

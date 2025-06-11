@@ -21,8 +21,8 @@ import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 import frc.robot.AlignPositionSelector;
 import frc.robot.LimelightHelpers;
-import frc.robot.commands.Drivetrain.PoseAlignCommand;
-import frc.robot.commands.Drivetrain.SetAligningWithReefCommand;
+import frc.robot.commands.Drivetrain.PoseAlign;
+import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -38,7 +38,7 @@ public class AlignAndScoreCoral extends SequentialCommandGroup {
     AlignPosition position = AlignPositionSelector.getSelectedAlignPosition();
     int targetTagID = DriverStation.getAlliance().get() == Alliance.Blue ? position.blueAprilTagID
         : position.redAprilTagID;
-    PoseAlignCommand alignWithReef = new PoseAlignCommand(
+    PoseAlign alignWithReef = new PoseAlign(
         drivetrain,
         position.fieldPosition.plus(new Transform2d(
             new Translation2d(
@@ -54,7 +54,7 @@ public class AlignAndScoreCoral extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new SetAligningWithReefCommand(drivetrain, true),
+        new UpdateAligningWithReef(drivetrain, true),
         AutoBuilder.pathfindToPoseFlipped(
             position.fieldPosition,
             Constants.kDrivetrain.PATH_CONSTRAINTS).until(

@@ -4,12 +4,12 @@
 
 package frc.robot.commands.Scoring;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.SourceIntake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ResetRelativeEncoders extends Command {
+public class ResetRelativeEncoders extends LoggedCommand {
   /** Creates a new ResetRelativeEncoders. */
   private EndEffector m_endEffector;
   private SourceIntake m_sourceIntake;
@@ -23,6 +23,7 @@ public class ResetRelativeEncoders extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     m_endEffector.resetRelativeEncoder();
     m_sourceIntake.resetRelativeEncoder();
   }
@@ -33,7 +34,9 @@ public class ResetRelativeEncoders extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    super.end(interrupted);
+  }
 
   // Returns true when the command should end.
   @Override

@@ -2,26 +2,32 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.slicelibs;
+package frc.robot.commands.Drivetrain;
 
-import org.littletonrobotics.junction.Logger;
+import frc.lib.LoggedCommand;
+import frc.robot.subsystems.drivetrain.Drivetrain;
 
-import edu.wpi.first.wpilibj2.command.Command;
+public class UpdateAligningWithReef extends LoggedCommand {
 
-/**
- * Command superclass for logging whether a command
- * is running to AdvantageKit
- */
-public class LoggedCommand extends Command {
-  /** Creates a new LoggedCommand. */
-  public LoggedCommand() {
+  private final Drivetrain m_drivetrain;
+  private final boolean m_aligningWithReef;
+
+  /** Creates a new UpdateAligningWithReefCommand. */
+  public UpdateAligningWithReef(Drivetrain drivetrain, boolean aligningWithReef) {
+
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drivetrain);
+
+    m_drivetrain = drivetrain;
+    m_aligningWithReef = aligningWithReef;
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Logger.recordOutput("Commands/" + getName() + " Running", true);
+    super.initialize();
+    m_drivetrain.setAligningWithReef(m_aligningWithReef);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,12 +37,13 @@ public class LoggedCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Logger.recordOutput(getName() + " Running", false);
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
+
 }

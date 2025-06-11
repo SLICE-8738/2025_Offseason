@@ -19,8 +19,8 @@ import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.Constants.kField.AlignPosition;
 import frc.robot.AlignPositionSelector;
-import frc.robot.commands.Drivetrain.PartialPoseAlignCommand;
-import frc.robot.commands.Drivetrain.SetAligningWithReefCommand;
+import frc.robot.commands.Drivetrain.PartialPoseAlign;
+import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -36,7 +36,7 @@ public class AlignAndGetAlgae extends SequentialCommandGroup {
     AlignPosition position = AlignPositionSelector.getSelectedAlignPosition();
     int targetTagID = DriverStation.getAlliance().get() == Alliance.Blue ? position.blueAprilTagID : position.redAprilTagID;
     PickupAlgaePhase1 toAlgae = new PickupAlgaePhase1(elevator, endEffector);
-    PartialPoseAlignCommand alignWithReef = new PartialPoseAlignCommand(
+    PartialPoseAlign alignWithReef = new PartialPoseAlign(
       drivetrain,
       driverController,
       position.fieldPosition.plus(new Transform2d(
@@ -48,7 +48,7 @@ public class AlignAndGetAlgae extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SetAligningWithReefCommand(drivetrain, true),
+      new UpdateAligningWithReef(drivetrain, true),
       AutoBuilder.pathfindToPoseFlipped(
         position.fieldPosition,
         Constants.kDrivetrain.PATH_CONSTRAINTS).until(

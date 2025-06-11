@@ -4,14 +4,14 @@
 
 package frc.robot.commands.Drivetrain;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 /** 
  * Directly sets the drive and angle motors of all drivetrain swerve modules
  * to given drive and angle motor percent outputs.
  */
-public class RunDutyCycleCommand extends Command {
+public class RunDutyCycle extends LoggedCommand {
 
   private final Drivetrain m_drivetrain;
 
@@ -23,7 +23,7 @@ public class RunDutyCycleCommand extends Command {
    * @param drivePercentOutput The desired percent output between -1 and 1 to set all drivetrain drive motors to.
    * @param anglePercentOutput The desired percent output between -1 and 1 to set all drivetrain angle motors to.
    */
-  public RunDutyCycleCommand(Drivetrain drivetrain, double drivePercentOutput, double anglePercentOutput) {
+  public RunDutyCycle(Drivetrain drivetrain, double drivePercentOutput, double anglePercentOutput) {
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
@@ -37,30 +37,27 @@ public class RunDutyCycleCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    super.initialize();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     m_drivetrain.runDutyCycle(drivePercentOutput, anglePercentOutput);
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
     m_drivetrain.runDutyCycle(0, 0);
-
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
     return false;
-
   }
 
 }

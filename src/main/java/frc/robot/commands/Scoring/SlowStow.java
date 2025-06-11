@@ -4,12 +4,12 @@
 
 package frc.robot.commands.Scoring;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Elevator;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class SlowStow extends Command {
+public class SlowStow extends LoggedCommand {
   /** Creates a new SlowStow. */
   private Elevator m_elevator;
 
@@ -23,6 +23,7 @@ public class SlowStow extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     m_elevator.set(0.2); // Set elevator speed.
   }
 
@@ -34,6 +35,7 @@ public class SlowStow extends Command {
   @Override
   public void end(boolean interrupted) {
     m_elevator.set(0); // Reset the elevator speed to zero.
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

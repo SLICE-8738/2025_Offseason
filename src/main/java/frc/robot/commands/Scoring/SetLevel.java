@@ -4,14 +4,14 @@
 
 package frc.robot.commands.Scoring;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class SetLevel extends Command {
+public class SetLevel extends LoggedCommand {
   private Level level;
   private LevelType levelType;
 
@@ -25,6 +25,7 @@ public class SetLevel extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     switch (levelType) {
       case SOURCE:
         EndEffector.setSourceLevel(level);
@@ -39,7 +40,6 @@ public class SetLevel extends Command {
         Elevator.setAlgaeLevel(level);
         break;
     }
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,6 +50,7 @@ public class SetLevel extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

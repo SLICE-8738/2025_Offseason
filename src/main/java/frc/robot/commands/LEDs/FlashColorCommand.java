@@ -6,10 +6,11 @@ package frc.robot.commands.LEDs;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.LEDs;
 
-public class FlashColorCommand extends Command {
+public class FlashColorCommand extends LoggedCommand {
   private final LEDs m_LEDs;
   private final int hue;
   private final double offTime, totalTime;
@@ -31,6 +32,7 @@ public class FlashColorCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     m_LEDs.setAll(Color.kBlack);
     timer.reset();
     timer.start();
@@ -53,6 +55,7 @@ public class FlashColorCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     m_LEDs.setAll(Color.kBlack);
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

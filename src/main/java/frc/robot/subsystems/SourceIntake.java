@@ -10,9 +10,8 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.lib.TalonFXPositionalSubsystem;
 import frc.robot.Constants;
-import frc.slicelibs.TalonFXPositionalSubsystem;
 
 public class SourceIntake extends TalonFXPositionalSubsystem {
 

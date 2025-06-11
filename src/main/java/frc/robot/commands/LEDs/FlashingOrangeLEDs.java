@@ -6,11 +6,11 @@ package frc.robot.commands.LEDs;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.LEDs;
 
-public class FlashingOrangeLEDs extends Command {
+public class FlashingOrangeLEDs extends LoggedCommand {
   
   private final LEDs m_LEDs;
   private final Timer timer;
@@ -27,6 +27,7 @@ public class FlashingOrangeLEDs extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     timer.reset();
     timer.start();
   }
@@ -43,7 +44,9 @@ public class FlashingOrangeLEDs extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    super.end(interrupted);
+  }
 
   // Returns true when the command should end.
   @Override

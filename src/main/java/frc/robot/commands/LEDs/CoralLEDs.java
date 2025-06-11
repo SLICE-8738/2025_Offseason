@@ -6,14 +6,14 @@ package frc.robot.commands.LEDs;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.lib.LoggedCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.LEDs;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class CoralLEDs extends Command {
+public class CoralLEDs extends LoggedCommand {
   private final LEDs m_leds; // LEDs
   private final EndEffector m_endEffector; // End Effector for helping determine if coral is inside the robot
 
@@ -37,12 +37,16 @@ public class CoralLEDs extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    super.initialize();
+
     for (int i = 0; i < Constants.kLEDs.LED_LENGTH; i++) {
       m_leds.setLEDhsv(i, orange[0], orange[1], orange[2]);
     }
 
     // Begin timer
     timer.restart();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -72,7 +76,8 @@ public class CoralLEDs extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {      
+  public void end(boolean interrupted) {   
+    super.end(interrupted);
     // Set it all to orange when the command finishes
     for (int i = 0; i < Constants.kLEDs.LED_LENGTH; i++) {
       m_leds.setLEDhsv(i, orange[0], orange[1], orange[2]);

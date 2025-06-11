@@ -70,7 +70,7 @@ public class RobotContainer {
   /* Drivetrain */
   public final DriveCommand m_swerveDriveOpenLoop;
   public final DriveCommand m_swerveDriveClosedLoop;
-  public final RunDutyCycleCommand m_setDrivePercentOutput;
+  public final RunDutyCycle m_setDrivePercentOutput;
   public final ResetFieldOrientedHeading m_resetFieldOrientedHeading;
   public final Command m_sysIDDriveRoutine;
   public final Command m_alignAndScoreCoral;
@@ -186,7 +186,7 @@ public class RobotContainer {
     /* Drivetrain */
     m_swerveDriveOpenLoop = new DriveCommand(m_drivetrain, driverController, true);
     m_swerveDriveClosedLoop = new DriveCommand(m_drivetrain, driverController, false);
-    m_setDrivePercentOutput = new RunDutyCycleCommand(m_drivetrain, 0.10, 0);
+    m_setDrivePercentOutput = new RunDutyCycle(m_drivetrain, 0.10, 0);
     m_resetFieldOrientedHeading = new ResetFieldOrientedHeading(m_drivetrain);
     m_sysIDDriveRoutine = new DeferredCommand(m_drivetrain::getSysIDDriveRoutine, Set.of(m_drivetrain));
 

@@ -6,12 +6,12 @@ package frc.robot.commands.SourceIntake;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.SourceIntake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ManualRotateSourceIntake extends Command {
+public class ManualRotateSourceIntake extends LoggedCommand {
   private final SourceIntake m_sourceIntake;
   private final GenericHID m_controller;
   private double axis;
@@ -29,6 +29,7 @@ public class ManualRotateSourceIntake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     maintaining = false;
   }
 
@@ -59,6 +60,7 @@ public class ManualRotateSourceIntake extends Command {
   @Override
   public void end(boolean interrupted) {
     m_sourceIntake.set(0);
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

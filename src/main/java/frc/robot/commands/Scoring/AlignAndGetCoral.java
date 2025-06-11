@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Constants.kField.AlignPosition;
 import frc.robot.Constants.kElevator.Level;
-import frc.robot.commands.Drivetrain.PoseAlignCommand;
-import frc.robot.commands.Drivetrain.SetAligningWithReefCommand;
+import frc.robot.commands.Drivetrain.PoseAlign;
+import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -30,7 +30,7 @@ public class AlignAndGetCoral extends SequentialCommandGroup {
   public AlignAndGetCoral(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector) {
 
     AlignPosition position = drivetrain.getClosestCoralStationPosition();
-    PoseAlignCommand alignWithCoralStation = new PoseAlignCommand(
+    PoseAlign alignWithCoralStation = new PoseAlign(
       drivetrain,
       position.fieldPosition.plus(new Transform2d(
         new Translation2d(
@@ -41,7 +41,7 @@ public class AlignAndGetCoral extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SetAligningWithReefCommand(drivetrain, false),
+      new UpdateAligningWithReef(drivetrain, false),
       AutoBuilder.pathfindToPoseFlipped(
         position.fieldPosition,
         Constants.kDrivetrain.PATH_CONSTRAINTS,

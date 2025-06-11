@@ -6,11 +6,12 @@ package frc.robot.commands.Elevator;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj2.command.Command;
+
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.Elevator;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ManualElevator extends Command {
+public class ManualElevator extends LoggedCommand {
   private final Elevator m_elevator;
   private final GenericHID m_controller;
   private boolean maintaining;
@@ -27,6 +28,7 @@ public class ManualElevator extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     maintaining = false;
   }
 
@@ -57,7 +59,7 @@ public class ManualElevator extends Command {
   @Override
   public void end(boolean interrupted) {
     m_elevator.set(0);
-
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

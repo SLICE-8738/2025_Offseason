@@ -4,12 +4,12 @@
 
 package frc.robot.commands.EndEffector;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.subsystems.EndEffector;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ScoreCoral extends Command {
+public class ScoreCoral extends LoggedCommand {
 
   private final EndEffector endEffector;
 
@@ -30,6 +30,7 @@ public class ScoreCoral extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     endEffector.maintainPosition();
   }
 
@@ -63,6 +64,7 @@ public class ScoreCoral extends Command {
   @Override
   public void end(boolean interrupted) {
     endEffector.setPlacementMotor(0);
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

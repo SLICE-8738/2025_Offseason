@@ -4,14 +4,13 @@
 
 package frc.robot.commands.EndEffector;
 
-import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.lib.LoggedCommand;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 import frc.robot.subsystems.EndEffector;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class PrepareEndEffector extends Command {
+public class PrepareEndEffector extends LoggedCommand {
   /** Creates a new PrepareEndEffector. */
   EndEffector endEffector;
   double angle;
@@ -29,6 +28,9 @@ public class PrepareEndEffector extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    super.initialize();
+
     switch (m_levelType) {
       case SOURCE:
         angle = EndEffector.getSourceLevel().angle;
@@ -48,6 +50,7 @@ public class PrepareEndEffector extends Command {
     if (endEffector.getAngle().getDegrees() > angle) {
       movementDirection = false;
     }
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -66,6 +69,7 @@ public class PrepareEndEffector extends Command {
   @Override
   public void end(boolean interrupted) {
     endEffector.setPlacementMotor(0);
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.

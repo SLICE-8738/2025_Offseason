@@ -1,4 +1,4 @@
-package frc.slicelibs.math;
+package frc.lib.math;
 
 public class Conversions {
 

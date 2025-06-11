@@ -4,11 +4,11 @@
 
 package frc.robot.commands.Drivetrain;
 
+import frc.lib.config.JoystickFilterConfig;
+import frc.lib.math.PolarJoystickFilter;
 import frc.robot.Button;
 import frc.robot.Constants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
-import frc.slicelibs.config.JoystickFilterConfig;
-import frc.slicelibs.math.PolarJoystickFilter;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;

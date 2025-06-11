@@ -23,10 +23,9 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.*;
 import edu.wpi.first.wpilibj.AnalogEncoder;
-
+import frc.lib.config.SwerveModuleConstants;
+import frc.lib.math.Conversions;
 import frc.robot.Constants;
-import frc.slicelibs.config.SwerveModuleConstants;
-import frc.slicelibs.math.Conversions;
 
 public class RealSwerveModuleIO implements SwerveModuleIO {
     private final Rotation2d angleOffset;

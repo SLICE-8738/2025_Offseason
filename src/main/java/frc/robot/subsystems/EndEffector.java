@@ -16,10 +16,10 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.TalonFXPositionalSubsystem;
 import frc.robot.Constants;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
-import frc.slicelibs.TalonFXPositionalSubsystem;
 
 public class EndEffector extends TalonFXPositionalSubsystem {
   private DutyCycleEncoder encoder;

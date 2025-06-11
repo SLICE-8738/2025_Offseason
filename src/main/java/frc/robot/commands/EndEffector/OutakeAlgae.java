@@ -4,11 +4,11 @@
 
 package frc.robot.commands.EndEffector;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.lib.LoggedCommand;
 import frc.robot.subsystems.EndEffector;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class OutakeAlgae extends Command {
+public class OutakeAlgae extends LoggedCommand {
   /** Creates a new EndEffectorCommand. */
 
   EndEffector endEffector;
@@ -22,6 +22,7 @@ public class OutakeAlgae extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    super.initialize();
     endEffector.maintainPosition();
   }
 
@@ -36,7 +37,7 @@ public class OutakeAlgae extends Command {
   @Override
   public void end(boolean interrupted) {
     endEffector.setPlacementMotor(0);
-
+    super.end(interrupted);
   }
 
   // Returns true when the command should end.
