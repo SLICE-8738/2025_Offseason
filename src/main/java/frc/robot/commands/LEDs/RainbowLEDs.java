@@ -1,8 +1,7 @@
 package frc.robot.commands.LEDs;
 
 import edu.wpi.first.wpilibj.util.Color;
-
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.LEDs;
 

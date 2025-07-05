@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.Constants;
-import frc.robot.Constants.kField.AlignPosition;
+import frc.robot.Constants.kField.ReefPosition;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
-import frc.robot.AlignPositionSelector;
+import frc.robot.ReefPositionSelector;
 import frc.robot.LimelightHelpers;
 import frc.robot.commands.Drivetrain.PoseAlign;
 import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
@@ -35,16 +35,21 @@ public class AlignAndScoreCoral extends SequentialCommandGroup {
   /** Creates a new AlignAndScoreCoral. */
   public AlignAndScoreCoral(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector) {
 
-    AlignPosition position = AlignPositionSelector.getSelectedAlignPosition();
+    ReefPosition position = ReefPositionSelector.getSelectedReefPosition();
+    Level level = EndEffector.getCoralLevel();
     int targetTagID = DriverStation.getAlliance().get() == Alliance.Blue ? position.blueAprilTagID
-        : position.redAprilTagID;
+        : position.redAprilTagID;        
     PoseAlign alignWithReef = new PoseAlign(
         drivetrain,
-        position.fieldPosition.plus(new Transform2d(
+        position.pathfindingTarget.plus(new Transform2d(
             new Translation2d(
                 (EndEffector.getCoralLevel() == Level.LEVEL4 || EndEffector.getCoralLevel() == Level.LEVEL1) ? 
                     Constants.kField.X_DISTANCE_TO_REEF_FACE : Constants.kField.X_DISTANCE_TO_REEF,
-                position.yAlignDistance.apply(EndEffector.getCoralLevel())),
+                position.leftBranch ? 
+                    (level == Level.LEVEL1 || level == Level.LEVEL1B) ? 
+                        Constants.kField.LEFT_CORNER_Y_DISTANCE : Constants.kField.LEFT_BRANCH_Y_DISTANCE
+                    : (level == Level.LEVEL1 || level == Level.LEVEL1B) ? 
+                        Constants.kField.RIGHT_CORNER_Y_DISTANCE : Constants.kField.RIGHT_BRANCH_Y_DISTANCE),
             new Rotation2d())));
     SequentialCommandGroup moveToLevel = new SequentialCommandGroup(new ConditionalCommand(
         new MoveToLevel(endEffector, elevator, LevelType.CORAL, true, false),
@@ -56,7 +61,7 @@ public class AlignAndScoreCoral extends SequentialCommandGroup {
     addCommands(
         new UpdateAligningWithReef(drivetrain, true),
         AutoBuilder.pathfindToPoseFlipped(
-            position.fieldPosition,
+            position.pathfindingTarget,
             Constants.kDrivetrain.PATH_CONSTRAINTS).until(
                 () -> (LimelightHelpers.getFiducialID("limelight-left") == targetTagID
                     || LimelightHelpers.getFiducialID("limelight-right") == targetTagID)

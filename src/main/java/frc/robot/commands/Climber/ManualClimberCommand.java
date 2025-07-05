@@ -6,7 +6,7 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.subsystems.Climber;
 
 /**

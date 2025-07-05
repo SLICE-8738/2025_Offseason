@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.Constants;
-import frc.robot.Constants.kField.AlignPosition;
+import frc.robot.Constants.kField.ReefPosition;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 import frc.robot.LimelightHelpers;
@@ -38,17 +38,21 @@ public class AlignAndScoreCoralAutonomous extends SequentialCommandGroup {
 
   /** Creates a new AlignAndScoreCoralAutonomous. */
   public AlignAndScoreCoralAutonomous(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector,
-      AlignPosition position, Level level) {
+      ReefPosition position, Level level) {
 
     int targetTagID = DriverStation.getAlliance().get() == Alliance.Blue ? position.blueAprilTagID
         : position.redAprilTagID;
     PoseAlign alignWithReef = new PoseAlign(
         drivetrain,
-        position.fieldPosition.plus(new Transform2d(
+        position.pathfindingTarget.plus(new Transform2d(
             new Translation2d(
                 (level == Level.LEVEL4 || level == Level.LEVEL1) ? 
                     Constants.kField.X_DISTANCE_TO_REEF_FACE: Constants.kField.X_DISTANCE_TO_REEF,
-                position.yAlignDistance.apply(level)),
+                position.leftBranch ? 
+                    (level == Level.LEVEL1 || level == Level.LEVEL1B) ? 
+                        Constants.kField.LEFT_CORNER_Y_DISTANCE : Constants.kField.LEFT_BRANCH_Y_DISTANCE
+                    : (level == Level.LEVEL1 || level == Level.LEVEL1B) ? 
+                        Constants.kField.RIGHT_CORNER_Y_DISTANCE : Constants.kField.RIGHT_BRANCH_Y_DISTANCE),
             new Rotation2d())));
 
     // Add your commands in the addCommands() call, e.g.
@@ -60,7 +64,7 @@ public class AlignAndScoreCoralAutonomous extends SequentialCommandGroup {
                 new SequentialCommandGroup(new IndexInCommand(endEffector, null), new IndexAlignCommand(endEffector)), 
                 new ManualElevator(elevator, null)),
             AutoBuilder.pathfindToPoseFlipped(
-                position.fieldPosition,
+                position.pathfindingTarget,
                 Constants.kDrivetrain.PATH_CONSTRAINTS).until(
                     () -> (LimelightHelpers.getFiducialID("limelight-left") == targetTagID
                         || LimelightHelpers.getFiducialID("limelight-right") == targetTagID)

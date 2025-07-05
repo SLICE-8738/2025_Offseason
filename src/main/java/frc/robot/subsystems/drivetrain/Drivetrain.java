@@ -5,7 +5,7 @@
 package frc.robot.subsystems.drivetrain;
 
 import frc.robot.*;
-import frc.robot.Constants.kField.AlignPosition;
+import frc.robot.Constants.kField.CoralStationPosition;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
@@ -611,16 +611,16 @@ public class Drivetrain extends SubsystemBase {
 
   }
 
-  public AlignPosition getClosestCoralStationPosition() {
+  public CoralStationPosition getClosestCoralStationPosition() {
 
     if (DriverStation.getAlliance().get() == Alliance.Blue) {
 
-      return getPose().getY() >= 4.025 ? AlignPosition.LEFT_CORAL_STATION_RIGHT : AlignPosition.RIGHT_CORAL_STATION_LEFT;
+      return getPose().getY() >= 4.025 ? CoralStationPosition.LEFT_CORAL_STATION_RIGHT : CoralStationPosition.RIGHT_CORAL_STATION_LEFT;
 
     }
     else {
 
-      return getPose().getY() <= 4.025 ? AlignPosition.LEFT_CORAL_STATION_RIGHT : AlignPosition.RIGHT_CORAL_STATION_LEFT;
+      return getPose().getY() <= 4.025 ? CoralStationPosition.LEFT_CORAL_STATION_RIGHT : CoralStationPosition.RIGHT_CORAL_STATION_LEFT;
 
     }
 

@@ -4,7 +4,7 @@
 
 package frc.robot.commands.Climber;
 
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 

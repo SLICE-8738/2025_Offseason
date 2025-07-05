@@ -4,7 +4,7 @@
 
 package frc.robot.commands.Drivetrain;
 
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 public class ResetFieldOrientedHeading extends LoggedCommand {

@@ -4,7 +4,7 @@
 
 package frc.robot.commands.Scoring;
 
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 import frc.robot.subsystems.Elevator;

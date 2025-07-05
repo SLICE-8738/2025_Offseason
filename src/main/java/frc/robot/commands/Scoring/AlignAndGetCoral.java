@@ -12,8 +12,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.Constants;
-import frc.robot.Constants.kField.AlignPosition;
-import frc.robot.Constants.kElevator.Level;
+import frc.robot.Constants.kField.CoralStationPosition;
 import frc.robot.commands.Drivetrain.PoseAlign;
 import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
 import frc.robot.subsystems.Elevator;
@@ -29,13 +28,15 @@ public class AlignAndGetCoral extends SequentialCommandGroup {
   /** Creates a new AlignAndGetCoral. */
   public AlignAndGetCoral(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector) {
 
-    AlignPosition position = drivetrain.getClosestCoralStationPosition();
+    CoralStationPosition position = drivetrain.getClosestCoralStationPosition();
     PoseAlign alignWithCoralStation = new PoseAlign(
       drivetrain,
-      position.fieldPosition.plus(new Transform2d(
+      position.pathfindingTarget.plus(new Transform2d(
         new Translation2d(
           Constants.kField.X_DISTANCE_TO_CORAL_STATION, 
-          position.yAlignDistance.apply(Level.SOURCE)), 
+          position.leftSide ? 
+            Constants.kField.CORAL_STATION_LEFT_Y_DISTANCE 
+            : Constants.kField.CORAL_STATION_RIGHT_Y_DISTANCE), 
         new Rotation2d())));
 
     // Add your commands in the addCommands() call, e.g.
@@ -43,7 +44,7 @@ public class AlignAndGetCoral extends SequentialCommandGroup {
     addCommands(
       new UpdateAligningWithReef(drivetrain, false),
       AutoBuilder.pathfindToPoseFlipped(
-        position.fieldPosition,
+        position.pathfindingTarget,
         Constants.kDrivetrain.PATH_CONSTRAINTS,
         /*0.5*/ 0.3).until(() -> alignWithCoralStation.getDistanceFromTarget() <= 1.1),
       alignWithCoralStation);

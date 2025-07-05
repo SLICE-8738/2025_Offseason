@@ -14,8 +14,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 public class PoseAlign extends LoggedCommand {
@@ -108,10 +107,6 @@ public class PoseAlign extends LoggedCommand {
 
   public double getDistanceFromTarget() {
     return m_drivetrain.getPose().getTranslation().getDistance(m_targetPose.getTranslation());
-  }
-
-  public Transform2d getTargetRelativePosition() {
-    return targetRelativePosition;
   }
 
 }

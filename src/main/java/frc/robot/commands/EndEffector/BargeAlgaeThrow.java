@@ -6,8 +6,7 @@ package frc.robot.commands.EndEffector;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.subsystems.EndEffector;
 

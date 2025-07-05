@@ -13,8 +13,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.Constants;
-import frc.robot.Constants.kField.AlignPosition;
-import frc.robot.Constants.kElevator.Level;
+import frc.robot.Constants.kField.CoralStationPosition;
 import frc.robot.commands.Drivetrain.PoseAlign;
 import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
 import frc.robot.commands.EndEffector.IndexSequence;
@@ -29,14 +28,16 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 public class AlignAndGetCoralAutonomous extends SequentialCommandGroup {
 
   /** Creates a new AlignAndGetCoralAutonomous. */
-  public AlignAndGetCoralAutonomous(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector, AlignPosition position) {
+  public AlignAndGetCoralAutonomous(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector, CoralStationPosition position) {
 
     PoseAlign alignWithCoralStation = new PoseAlign(
       drivetrain,
-      position.fieldPosition.plus(new Transform2d(
+      position.pathfindingTarget.plus(new Transform2d(
         new Translation2d(
           Constants.kField.X_DISTANCE_TO_CORAL_STATION, 
-          position.yAlignDistance.apply(Level.SOURCE)), 
+          position.leftSide ? 
+            Constants.kField.CORAL_STATION_LEFT_Y_DISTANCE 
+            : Constants.kField.CORAL_STATION_RIGHT_Y_DISTANCE), 
         new Rotation2d())));
 
     // Add your commands in the addCommands() call, e.g.
@@ -46,7 +47,7 @@ public class AlignAndGetCoralAutonomous extends SequentialCommandGroup {
       new ParallelCommandGroup(
         new ToStow(endEffector, elevator),
         AutoBuilder.pathfindToPoseFlipped(
-          position.fieldPosition,
+          position.pathfindingTarget,
           Constants.kDrivetrain.PATH_CONSTRAINTS,
           /*0.5*/ 0.3).until(() -> alignWithCoralStation.getDistanceFromTarget() <= 1.1)),
       new ParallelCommandGroup(

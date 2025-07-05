@@ -60,7 +60,7 @@ public class RobotContainer {
   public final LEDs m_leds;
 
   public final AutoSelector m_autoSelector;
-  public final AlignPositionSelector m_alignPositionSelector;
+  public final ReefPositionSelector m_reefPositionSelector;
   public final ShuffleboardData m_shuffleboardData;
 
   // ==========================
@@ -176,7 +176,7 @@ public class RobotContainer {
     m_leds = new LEDs();
 
     m_autoSelector = new AutoSelector(m_drivetrain, m_elevator, m_endEffector, m_sourceIntake);
-    m_alignPositionSelector = new AlignPositionSelector();
+    m_reefPositionSelector = new ReefPositionSelector();
     m_shuffleboardData = new ShuffleboardData(m_drivetrain, m_endEffector, m_autoSelector);
 
     // ==========================

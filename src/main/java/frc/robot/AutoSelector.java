@@ -8,11 +8,12 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-//import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
-import frc.robot.Constants.kField.AlignPosition;
+
+import frc.robot.Constants.kField.CoralStationPosition;
+import frc.robot.Constants.kField.ReefPosition;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.commands.Scoring.AlignAndGetCoralAutonomous;
 import frc.robot.commands.Scoring.AlignAndScoreCoralAutonomous;
@@ -104,19 +105,31 @@ public class AutoSelector {
         Pathfinding.ensureInitialized();
 
         /* Reef Positions */
-        for (int i = 0; i < 12; i++) {
+        for (ReefPosition position : ReefPosition.values()) {
 
-            AlignPosition position = AlignPosition.values()[i];
-
-            for (int j : new int[] {3, 5, 7}) {
-
-                Level level = Level.values()[j];
+            for (Level level : new Level[] {Level.LEVEL1, Level.LEVEL2, Level.LEVEL3}) {
 
                 NamedCommands.registerCommand(
                     "Score Coral " + position.name + " " + level.name,
                     new AlignAndScoreCoralAutonomous(drivetrain, elevator, endEffector, position, level));
 
-                autoPoses.put("Score Coral " + position.name + " " + level.name, position.fieldPosition);
+                autoPoses.put("Score Coral " + position.name + " " + level.name, position.pathfindingTarget);
+
+            }
+
+            ReefPosition level2Position;
+
+            switch (position.reefSide) {
+                
+                case LEFT:
+                    level2Position = ReefPosition.BACK_MIDDLE_LEFT_BRANCH;
+                    break;
+                case RIGHT:
+                    level2Position = ReefPosition.BACK_MIDDLE_RIGHT_BRANCH;
+                    break;
+                default:
+                    level2Position = position;
+                    break;
 
             }
 
@@ -128,24 +141,22 @@ public class AutoSelector {
                         drivetrain, 
                         elevator, 
                         endEffector, 
-                        position == AlignPosition.BACK_LEFT_LEFT_BRANCH ? AlignPosition.BACK_MIDDLE_LEFT_BRANCH : AlignPosition.BACK_MIDDLE_RIGHT_BRANCH, 
+                        level2Position, 
                         Level.LEVEL2),
                     () -> DriverStation.getMatchTime() >= 3));
 
-            autoPoses.put("Score Coral " + position.name + " Level 4", position.fieldPosition);
+            autoPoses.put("Score Coral " + position.name + " Level 4", position.pathfindingTarget);
 
         }
 
         /* Coral Station Positions */
-        for (int i = 12; i < 16; i++) {
-
-            AlignPosition position = AlignPosition.values()[i];
+        for (CoralStationPosition position : CoralStationPosition.values()) {
             
                 NamedCommands.registerCommand(
                     "Get Coral " + position.name, 
                     new AlignAndGetCoralAutonomous(drivetrain, elevator, endEffector, position));
 
-                autoPoses.put("Get Coral " + position.name, position.fieldPosition);
+                autoPoses.put("Get Coral " + position.name, position.pathfindingTarget);
 
         }
 

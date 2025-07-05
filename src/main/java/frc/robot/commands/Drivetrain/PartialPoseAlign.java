@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.lib.config.JoystickFilterConfig;
 import frc.lib.math.PolarJoystickFilter;
 import frc.robot.Constants;

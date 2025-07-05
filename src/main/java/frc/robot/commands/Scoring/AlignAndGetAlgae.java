@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
-import frc.robot.Constants.kField.AlignPosition;
-import frc.robot.AlignPositionSelector;
+import frc.robot.Constants.kField.ReefPosition;
+import frc.robot.ReefPositionSelector;
 import frc.robot.commands.Drivetrain.PartialPoseAlign;
 import frc.robot.commands.Drivetrain.UpdateAligningWithReef;
 import frc.robot.subsystems.Elevator;
@@ -33,13 +33,13 @@ public class AlignAndGetAlgae extends SequentialCommandGroup {
   /** Creates a new AlignAndRemoveAlgae. */
   public AlignAndGetAlgae(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector, PS4Controller driverController) {
 
-    AlignPosition position = AlignPositionSelector.getSelectedAlignPosition();
+    ReefPosition position = ReefPositionSelector.getSelectedReefPosition();
     int targetTagID = DriverStation.getAlliance().get() == Alliance.Blue ? position.blueAprilTagID : position.redAprilTagID;
     PickupAlgaePhase1 toAlgae = new PickupAlgaePhase1(elevator, endEffector);
     PartialPoseAlign alignWithReef = new PartialPoseAlign(
       drivetrain,
       driverController,
-      position.fieldPosition.plus(new Transform2d(
+      position.pathfindingTarget.plus(new Transform2d(
         new Translation2d(
           Constants.kField.X_DISTANCE_TO_REEF_FACE, 
           0), 
@@ -50,7 +50,7 @@ public class AlignAndGetAlgae extends SequentialCommandGroup {
     addCommands(
       new UpdateAligningWithReef(drivetrain, true),
       AutoBuilder.pathfindToPoseFlipped(
-        position.fieldPosition,
+        position.pathfindingTarget,
         Constants.kDrivetrain.PATH_CONSTRAINTS).until(
           () -> (LimelightHelpers.getFiducialID("limelight-left") == targetTagID
             || LimelightHelpers.getFiducialID("limelight-right") == targetTagID)

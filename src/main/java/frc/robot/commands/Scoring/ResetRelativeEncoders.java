@@ -4,7 +4,7 @@
 
 package frc.robot.commands.Scoring;
 
-import frc.lib.LoggedCommand;
+import frc.lib.commands.LoggedCommand;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.SourceIntake;
 

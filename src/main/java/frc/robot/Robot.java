@@ -91,7 +91,7 @@ public class Robot extends LoggedRobot {
   @Override
   public void disabledPeriodic() {
     //m_robotContainer.m_autoSelector.updateInitialAutoPoseOffset();
-    m_robotContainer.m_alignPositionSelector.update();
+    m_robotContainer.m_reefPositionSelector.update();
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -128,7 +128,7 @@ public class Robot extends LoggedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.m_alignPositionSelector.update();
+    m_robotContainer.m_reefPositionSelector.update();
   }
 
   @Override
