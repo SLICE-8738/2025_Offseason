@@ -14,6 +14,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.lib.commands.LoggedCommand;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
@@ -33,8 +34,8 @@ public class PoseAlign extends LoggedCommand {
    *                   from RobotContainer.
    * @param targetPose The pose to align to
    * @param automaticallyFlip Whether the given pose should automatically be
-   *                          flipped to the red alliance side (given pose
-   *                          must be for blue alliance)
+   *                          flipped to the red alliance side when appropriate 
+   *                          upon initialization (given pose must be for blue alliance)
    */
   public PoseAlign(Drivetrain drivetrain, Pose2d targetPose) {
 

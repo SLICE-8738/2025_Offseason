@@ -46,7 +46,7 @@ public class AlignAndGetCoral extends SequentialCommandGroup {
       AutoBuilder.pathfindToPoseFlipped(
         position.pathfindingTarget,
         Constants.kDrivetrain.PATH_CONSTRAINTS,
-        /*0.5*/ 0.3).until(() -> alignWithCoralStation.getDistanceFromTarget() <= 1.1),
+        0.3).until(() -> alignWithCoralStation.getDistanceFromTarget() <= 1.1),
       alignWithCoralStation);
 
   }
