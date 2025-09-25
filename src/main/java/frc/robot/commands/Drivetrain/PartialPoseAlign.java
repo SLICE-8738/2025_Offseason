@@ -35,16 +35,18 @@ public class PartialPoseAlign extends LoggedCommand {
 
   /**
    * Automatically aligns along robot-relative Y and rotational axes 
-   * to the given pose using PID.
+   * to the given pose using PID while using manual input from a controller
+   * for the robot-relative X axis.
    * 
    * @param drivetrain The drivetrain subsystem instance passed in
    *                   from RobotContainer.
+   * @param driverController The controller object for the driver controller
    * @param targetPose The pose to align to (must be for blue alliance)
    * @param automaticallyFlip Whether the given pose should automatically be
    *                          flipped to the red alliance side when red alliance
    *                          is selected in DriverStation
    */
-  public PartialPoseAlign(Drivetrain drivetrain, PS4Controller driverController, Pose2d targetPose) {
+  public PartialPoseAlign(Drivetrain drivetrain, PS4Controller driverController, Pose2d targetPose, boolean automaticallyFlip) {
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
@@ -59,7 +61,7 @@ public class PartialPoseAlign extends LoggedCommand {
       Constants.OperatorConstants.DRIVE_EXPONENT,
       Constants.OperatorConstants.DRIVE_EXPONENT_PERCENT));
 
-    m_targetPose = DriverStation.getAlliance().get() == Alliance.Blue ? targetPose : FlippingUtil.flipFieldPose(targetPose);
+    m_targetPose = (DriverStation.getAlliance().get() == Alliance.Blue || !automaticallyFlip) ? targetPose : FlippingUtil.flipFieldPose(targetPose);
 
     yController = new PIDController(5.5, 0, 0.55);
     rotationController = new PIDController(6, 0, 0);
@@ -86,14 +88,14 @@ public class PartialPoseAlign extends LoggedCommand {
   @Override
   public void execute() {
 
-    targetRelativePosition = m_targetPose.minus(m_drivetrain.getPose());
+    targetRelativePosition = m_drivetrain.getPose().minus(m_targetPose);
 
     double translationX = translationFilter.filter(-m_driverController.getRawAxis(1), 0)[0];
     double translationY = yController.calculate(targetRelativePosition.getY());
     double rotation = rotationController.calculate(m_drivetrain.getPose().getRotation().getDegrees());
 
     m_drivetrain.drive(
-      new Transform2d(translationX, -translationY, Rotation2d.fromDegrees(rotation)), 
+      new Transform2d(translationX, translationY, Rotation2d.fromDegrees(rotation)), 
       false, 
       false);
 
@@ -122,10 +124,6 @@ public class PartialPoseAlign extends LoggedCommand {
 
   public double getDistanceFromTarget() {
     return m_drivetrain.getPose().getTranslation().getDistance(m_targetPose.getTranslation());
-  }
-
-  public Transform2d getTargetRelativePosition() {
-    return targetRelativePosition;
   }
 
 }
