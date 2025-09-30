@@ -10,7 +10,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -31,7 +31,7 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 public class AlignAndGetAlgae extends SequentialCommandGroup {
 
   /** Creates a new AlignAndRemoveAlgae. */
-  public AlignAndGetAlgae(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector, PS4Controller driverController) {
+  public AlignAndGetAlgae(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector, XboxController driverController) {
 
     ReefPosition position = ReefPositionSelector.getSelectedReefPosition();
     int targetTagID = DriverStation.getAlliance().get() == Alliance.Blue ? position.blueAprilTagID : position.redAprilTagID;

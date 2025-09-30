@@ -11,7 +11,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.commands.LoggedCommand;
@@ -23,7 +23,7 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 public class PartialPoseAlign extends LoggedCommand {
 
   private final Drivetrain m_drivetrain;
-  private final PS4Controller m_driverController;
+  private final XboxController m_driverController;
 
   private final PolarJoystickFilter translationFilter;
 
@@ -44,7 +44,7 @@ public class PartialPoseAlign extends LoggedCommand {
    *                          flipped to the red alliance side when red alliance
    *                          is selected in DriverStation
    */
-  public PartialPoseAlign(Drivetrain drivetrain, PS4Controller driverController, Pose2d targetPose) {
+  public PartialPoseAlign(Drivetrain drivetrain, XboxController driverController, Pose2d targetPose) {
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);

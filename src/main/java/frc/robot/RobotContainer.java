@@ -7,8 +7,8 @@ package frc.robot;
 import java.util.Set;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.DeferredCommand;
@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.Mode;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
-import frc.robot.commands.Climber.*;
+//import frc.robot.commands.Climber.*;
 import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Elevator.ManualElevator;
 import frc.robot.commands.EndEffector.*;
@@ -45,15 +45,15 @@ import frc.robot.testing.routines.DrivetrainTest;
  */
 public class RobotContainer {
 
-  private final PS4Controller driverController = Button.controller1;
-  private final GenericHID operatorController = Button.controller2;
+  private final XboxController driverController = Button.controller1;
+  private final XboxController operatorController = Button.controller2;
 
   // ==========================
   // Subsystems
   // ==========================
 
   public final Drivetrain m_drivetrain;
-  public final Climber m_climber;
+  //public final Climber m_climber;
   public final Elevator m_elevator;
   public final EndEffector m_endEffector;
   public final SourceIntake m_sourceIntake;
@@ -97,8 +97,8 @@ public class RobotContainer {
   public final MoveToLevelParallel m_moveToLevelParallel;
 
   /* Climber */
-  public final ManualClimberCommand m_manualClimb;
-  public final SequentialCommandGroup m_climb;
+  //public final ManualClimberCommand m_manualClimb;
+  //public final SequentialCommandGroup m_climb;
 
   /* Elevator */
   public final ManualElevator m_manualElevator;
@@ -172,7 +172,7 @@ public class RobotContainer {
     m_endEffector = new EndEffector();
     m_elevator = new Elevator();
     m_sourceIntake = new SourceIntake();
-    m_climber = new Climber();
+    //m_climber = new Climber();
     m_leds = new LEDs();
 
     m_autoSelector = new AutoSelector(m_drivetrain, m_elevator, m_endEffector, m_sourceIntake);
@@ -239,12 +239,12 @@ public class RobotContainer {
     m_goToSourceIntakeAngle2 = new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.CLIMB_ANGLE);
 
     /* Climber */
-    m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
+  //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
     // The climb command is created with a WaitCommand before it so that the climber
     // won't immediately activate when the button is pressed.
     // This prevents accidental damage to the climber by running it when there isn't
     // a cage.
-    m_climb = new SequentialCommandGroup(new WaitCommand(0.5), new ClimbCommand(m_climber));
+   // m_climb = new SequentialCommandGroup(new WaitCommand(0.5), new ClimbCommand(m_climber));
 
     /* LEDs */
     m_coralLEDs = new CoralLEDs(m_leds, m_endEffector);
@@ -260,7 +260,7 @@ public class RobotContainer {
     configureBindings();
 
     m_drivetrain.setDefaultCommand(m_swerveDriveClosedLoop);
-    m_climber.setDefaultCommand(m_manualClimb);
+   // m_climber.setDefaultCommand(m_manualClimb);
     m_endEffector.setDefaultCommand(m_manualEndEffector);
     m_elevator.setDefaultCommand(m_manualElevator);
     m_sourceIntake.setDefaultCommand(m_manualSourceIntake);

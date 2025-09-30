@@ -12,7 +12,7 @@ import frc.robot.subsystems.drivetrain.Drivetrain;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
-import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class DriveCommand extends Command {
@@ -20,7 +20,7 @@ public class DriveCommand extends Command {
   /** Creates a new SwerveDriveCommand. */
   private final Drivetrain m_drivetrain;
 
-  private final PS4Controller m_driverController;
+  private final XboxController m_driverController;
   private final PolarJoystickFilter translationFilter, rotationFilter;
 
   private final boolean m_isOpenLoop;
@@ -28,7 +28,7 @@ public class DriveCommand extends Command {
 
   private final PIDController rotationController;
 
-  public DriveCommand(Drivetrain drivetrain, PS4Controller driverController, boolean isOpenLoop) {
+  public DriveCommand(Drivetrain drivetrain, XboxController driverController, boolean isOpenLoop) {
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);

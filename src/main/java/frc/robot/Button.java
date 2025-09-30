@@ -1,7 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class Button {
 
     /* Controllers */
-    public static PS4Controller controller1 = new PS4Controller(0);
-    public static GenericHID controller2 = new GenericHID(1);
+    public static XboxController controller1 = new XboxController(0);
+    public static XboxController controller2 = new XboxController(1);
 
     /* Controller 1 Buttons */
     public static Trigger square1 = new JoystickButton(controller1, 1);
