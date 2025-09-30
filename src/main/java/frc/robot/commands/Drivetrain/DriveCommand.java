@@ -26,7 +26,7 @@ public class DriveCommand extends Command {
   private final boolean m_isOpenLoop;
   private boolean m_isFieldRelative;
 
-  private final PIDController rotationController;
+  //private final PIDController rotationController;
 
   public DriveCommand(Drivetrain drivetrain, XboxController driverController, boolean isOpenLoop) {
     
@@ -50,8 +50,6 @@ public class DriveCommand extends Command {
         Constants.OperatorConstants.TURN_EXPONENT,
         Constants.OperatorConstants.TURN_EXPONENT_PERCENT));
 
-    rotationController = new PIDController(6, 0, 0);
-
   }
 
   // Called when the command is initially scheduled.
@@ -74,9 +72,6 @@ public class DriveCommand extends Command {
     double translationY = translation[1] * Constants.kDrivetrain.MAX_LINEAR_VELOCITY * multipler;
 
     double rotationFF = rotationFilter.filter(-m_driverController.getRawAxis(2), 0)[0] * Constants.kDrivetrain.MAX_ANGULAR_VELOCITY * multipler;
-    double rotationFeedback = rotationFF == 0 ? 
-      rotationController.calculate(m_drivetrain.getRotationalVelocity().getRadians(), rotationFF)
-      : 0;
 
     m_isFieldRelative = !Button.rightBumper1.getAsBoolean();
 
@@ -84,11 +79,10 @@ public class DriveCommand extends Command {
       translationX *= -0.5;
       translationY *= -0.5;
       rotationFF *= 0.5;
-      rotationFeedback *= 0.5;
     }
 
     m_drivetrain.drive(
-        new Transform2d(translationX, translationY, new Rotation2d(rotationFF /*+ rotationFeedback*/)),
+        new Transform2d(translationX, translationY, new Rotation2d(rotationFF)),
         m_isOpenLoop,
         m_isFieldRelative);
 

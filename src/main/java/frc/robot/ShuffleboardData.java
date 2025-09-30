@@ -128,9 +128,9 @@ public class ShuffleboardData {
         // End Effector
         // ==========================
 
-        ShuffleboardTuner.create(
+        /*ShuffleboardTuner.create(
             value -> endEffector.normalKG = value,
-            "End Effector kG");
+            "End Effector kG");*/
     }
 
 }
