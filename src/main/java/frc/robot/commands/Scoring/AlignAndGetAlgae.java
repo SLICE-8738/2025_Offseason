@@ -43,8 +43,8 @@ public class AlignAndGetAlgae extends SequentialCommandGroup {
         new Translation2d(
           Constants.kField.X_DISTANCE_TO_REEF_FACE, 
           0), 
-        new Rotation2d())),
-      true);
+        new Rotation2d()))
+      );
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());

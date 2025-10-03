@@ -1,5 +1,7 @@
 package frc.robot;
 
+import org.w3c.dom.xpath.XPathNSResolver;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -13,10 +15,10 @@ public class Button {
     public static XboxController controller2 = new XboxController(1);
 
     /* Controller 1 Buttons */
-    public static Trigger square1 = new JoystickButton(controller1, 1);
-    public static Trigger cross1 = new JoystickButton(controller1, 2);
-    public static Trigger circle1 = new JoystickButton(controller1, 3);
-    public static Trigger triangle1 = new JoystickButton(controller1, 4);
+    public static Trigger buttonA = new JoystickButton(controller1, XboxController.Button.kA.value);
+    public static Trigger buttonB = new JoystickButton(controller1, XboxController.Button.kB.value);
+    public static Trigger buttonX = new JoystickButton(controller1, XboxController.Button.kX.value);
+    public static Trigger buttonY = new JoystickButton(controller1, XboxController.Button.kY.value);
     public static Trigger leftBumper1 = new JoystickButton(controller1, 5);
     public static Trigger rightBumper1 = new JoystickButton(controller1, 6);
     public static Trigger leftTrigger1 = new JoystickButton(controller1, 7);
@@ -33,10 +35,10 @@ public class Button {
     public static Trigger controlPadDown1 = new POVButton(controller1, 180);
 
     /* Controller 2 Buttons */
-    public static Trigger square2 = new JoystickButton(controller2, 1);
-    public static Trigger cross2 = new JoystickButton(controller2, 2);
-    public static Trigger circle2 = new JoystickButton(controller2, 3);
-    public static Trigger triangle2 = new JoystickButton(controller2, 4);
+    public static Trigger buttonX2 = new JoystickButton(controller2, XboxController.Button.kX.value);
+    public static Trigger buttonA2 = new JoystickButton(controller2, XboxController.Button.kA.value);
+    public static Trigger buttonB2 = new JoystickButton(controller2, XboxController.Button.kB.value);
+    public static Trigger buttonY2 = new JoystickButton(controller2, XboxController.Button.kY.value);
     public static Trigger leftBumper2 = new JoystickButton(controller2, 5);
     public static Trigger rightBumper2 = new JoystickButton(controller2, 6);
     public static Trigger leftTrigger2 = new JoystickButton(controller2, 7);
@@ -45,7 +47,7 @@ public class Button {
     public static Trigger start = new JoystickButton(controller2, 10);
     public static Trigger leftStickClick2 = new JoystickButton(controller2, 11);
     public static Trigger rightStickClick2 = new JoystickButton(controller2, 12);
-    public static Trigger psButton2 = new JoystickButton(controller2, 13);
+   public static Trigger psButton2 = new JoystickButton(controller2, 13);
     public static Trigger controlPadRight2 = new POVButton(controller2, 90);
     public static Trigger controlPadUp2 = new POVButton(controller2, 0);
     public static Trigger controlPadLeft2 = new POVButton(controller2, 270);

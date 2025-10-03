@@ -292,22 +292,23 @@ public class RobotContainer {
     Button.options.onTrue(m_resetFieldOrientedHeading);
     Button.controlPadLeft1.whileTrue(m_sysIDDriveRoutine);
     Button.leftTrigger1.whileTrue(m_alignAndScoreCoral);
-    Button.square1.whileTrue(m_alignAndGetAlgae);
-    Button.cross1.whileTrue(m_alignAndGetCoral);
+    Button.buttonX.whileTrue(m_alignAndGetAlgae);
+    Button.buttonA.whileTrue(m_alignAndGetCoral);
+    
 
     /* Elevator */
-    Button.psButton1.onTrue(m_elevatorToStow);
+    //Button.psButton1.onTrue(m_elevatorToStow);
 
     /* Scoring */
     Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
         () -> (Elevator.getCoralLevel() == Level.LEVEL4)));
 
-    Button.circle1.onTrue(new ConditionalCommand(m_toAlgaeLower, m_toAlgaeHigher,
+    Button.buttonB.onTrue(new ConditionalCommand(m_toAlgaeLower, m_toAlgaeHigher,
         () -> (Elevator.getAlgaeLevel().height - m_elevator.getPositions()[0] < 0)));
-    Button.triangle1.onTrue(m_clampAlgae);
+    Button.buttonY.onTrue(m_clampAlgae);
 
-    Button.cross1.onTrue(m_goToSourceIntakeAngle1);
-    Button.cross1.onTrue(m_indexCoral);
+    Button.buttonA.onTrue(m_goToSourceIntakeAngle1);
+    Button.buttonA.onTrue(m_indexCoral);
     Button.rightTrigger1.onTrue(m_scoreCoral);
 
     // ==================
@@ -315,9 +316,9 @@ public class RobotContainer {
     // ==================
 
     /* End Effector */
-    Button.triangle2.onTrue(m_intakeAdjustment);
-    Button.triangle2.onFalse(m_goToSourceIntakeAngle1);
-    Button.triangle2.onFalse(m_indexCoral);
+    Button.buttonY2.onTrue(m_intakeAdjustment);
+    Button.buttonY2.onFalse(m_goToSourceIntakeAngle1);
+    Button.buttonY2.onFalse(m_indexCoral);
 
     /* Elevator */
     Button.controlPadDown2.onTrue(m_setLevelOne);
@@ -325,13 +326,13 @@ public class RobotContainer {
     Button.controlPadLeft2.onTrue(m_setLevelTwo);
     Button.controlPadRight2.onTrue(m_setLevelThree);
     Button.controlPadUp2.onTrue(m_setLevelFour);
-    Button.square2.onTrue(m_elevatorToStow);
+    Button.buttonX2.onTrue(m_elevatorToStow);
 
     Button.start.onTrue(new InstantCommand(
         () -> m_elevator.setEncoderPosition(0), m_elevator));
 
-    Button.cross2.whileTrue(m_manualFeed);
-    Button.circle2.onTrue(m_goToSourceIntakeAngle2);
+    Button.buttonA2.whileTrue(m_manualFeed);
+    Button.buttonB2.onTrue(m_goToSourceIntakeAngle2);
 
     /* Scoring */
     Button.leftBumper2.onTrue(m_setLowerAlgae);

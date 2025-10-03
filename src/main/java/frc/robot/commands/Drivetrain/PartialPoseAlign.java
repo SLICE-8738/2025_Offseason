@@ -61,7 +61,7 @@ public class PartialPoseAlign extends LoggedCommand {
       Constants.OperatorConstants.DRIVE_EXPONENT,
       Constants.OperatorConstants.DRIVE_EXPONENT_PERCENT));
 
-    m_targetPose = (DriverStation.getAlliance().get() == Alliance.Blue || !automaticallyFlip) ? targetPose : FlippingUtil.flipFieldPose(targetPose);
+    m_targetPose = (DriverStation.getAlliance().get() == Alliance.Blue) ? targetPose : FlippingUtil.flipFieldPose(targetPose);
 
     yController = new PIDController(5.5, 0, 0.55);
     rotationController = new PIDController(6, 0, 0);
