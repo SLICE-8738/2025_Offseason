@@ -33,6 +33,7 @@ import frc.robot.commands.SourceIntake.RotateSourceIntake;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.drivetrain.*;
 import frc.robot.testing.routines.DrivetrainTest;
+import frc.robot.testing.routines.HelloTest;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -289,17 +290,19 @@ public class RobotContainer {
     // ================
 
     /* Drivetrain */
-    Button.options.onTrue(m_resetFieldOrientedHeading);
-    Button.controlPadLeft1.whileTrue(m_sysIDDriveRoutine);
-    Button.leftTrigger1.whileTrue(m_alignAndScoreCoral);
-    Button.buttonX.whileTrue(m_alignAndGetAlgae);
-    Button.buttonA.whileTrue(m_alignAndGetCoral);
+
+    //Button.cont1_options.onTrue(m_resetFieldOrientedHeading);
+    //Button.controlPadLeft1.whileTrue(m_sysIDDriveRoutine);
+    //Button.leftTrigger1.whileTrue(m_alignAndScoreCoral);
+    //Button.buttonX.whileTrue(m_alignAndGetAlgae);
+    //Button.buttonA.whileTrue(m_alignAndGetCoral);
     
 
     /* Elevator */
     //Button.psButton1.onTrue(m_elevatorToStow);
 
     /* Scoring */
+    /*
     Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
         () -> (Elevator.getCoralLevel() == Level.LEVEL4)));
 
@@ -316,11 +319,13 @@ public class RobotContainer {
     // ==================
 
     /* End Effector */
+    /*
     Button.buttonY2.onTrue(m_intakeAdjustment);
     Button.buttonY2.onFalse(m_goToSourceIntakeAngle1);
     Button.buttonY2.onFalse(m_indexCoral);
 
     /* Elevator */
+    /*
     Button.controlPadDown2.onTrue(m_setLevelOne);
     Button.back.onTrue(m_setLevelOneB);
     Button.controlPadLeft2.onTrue(m_setLevelTwo);
@@ -335,11 +340,13 @@ public class RobotContainer {
     Button.buttonB2.onTrue(m_goToSourceIntakeAngle2);
 
     /* Scoring */
+    /*
     Button.leftBumper2.onTrue(m_setLowerAlgae);
     Button.rightBumper2.onTrue(m_setUpperAlgae);
     Button.rightTrigger2.onTrue(m_bargeAlgae);
     Button.rightTrigger2.onFalse(m_bargeAlgaeThrow);
     Button.leftTrigger2.onTrue(m_processAlgae);
+    */
 
     robotTipping.onTrue(m_elevatorEmergencyStow);
   }

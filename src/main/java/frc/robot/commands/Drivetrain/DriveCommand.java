@@ -66,14 +66,14 @@ public class DriveCommand extends Command {
 
     double[] translation = translationFilter.filter(-m_driverController.getRawAxis(1), -m_driverController.getRawAxis(0));
 
-    double multipler = Button.leftBumper1.getAsBoolean() ? 0.33 : 1;
+    double multipler = Button.cont1_leftBumper.getAsBoolean() ? 0.33 : 1;
 
     double translationX = translation[0] * Constants.kDrivetrain.MAX_LINEAR_VELOCITY * multipler;
     double translationY = translation[1] * Constants.kDrivetrain.MAX_LINEAR_VELOCITY * multipler;
 
     double rotationFF = rotationFilter.filter(-m_driverController.getRawAxis(4), 0)[0] * Constants.kDrivetrain.MAX_ANGULAR_VELOCITY * multipler;
 
-    m_isFieldRelative = !Button.rightBumper1.getAsBoolean();
+    m_isFieldRelative = !Button.cont1_rightBumper.getAsBoolean();
 
     if (!m_isFieldRelative) {
       translationX *= -0.5;
