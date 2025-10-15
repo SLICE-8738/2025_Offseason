@@ -21,7 +21,7 @@ public class Climber extends SubsystemBase{
 
   /** Creates a new Climb. */
   public Climber() {
-    climberMotor = new TalonFX(Constants.kClimber.MOTOR_ID); //TODO make sure to get actual device ID
+    climberMotor = new TalonFX(Constants.kClimber.MOTOR_ID); 
     climberMotor.getConfigurator().apply(Constants.CTRE_CONFIGS.climberFXConfig);
 
     // The absolute encoder is used to get an accurate encoder reading no matter where the climber is on power-on

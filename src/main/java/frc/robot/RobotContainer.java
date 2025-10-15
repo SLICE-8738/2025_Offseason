@@ -6,6 +6,8 @@ package frc.robot;
 
 import java.util.Set;
 
+import javax.xml.stream.events.EndElement;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -127,6 +129,7 @@ public class RobotContainer {
 
   /* Triggers */
   public final Trigger robotTipping;
+  //public final Trigger slowModeTrigger;
 
   /* Tests */
   public final DrivetrainTest m_drivetrainTest;
@@ -256,15 +259,16 @@ public class RobotContainer {
 
     /* Triggers */
     robotTipping = new Trigger(() -> m_drivetrain.getRoll() > 20 || m_drivetrain.getPitch() > 20);
+    //slowModeTrigger = new Trigger(() -> );
 
     // Configure the trigger bindings
     configureBindings();
 
     m_drivetrain.setDefaultCommand(m_swerveDriveClosedLoop);
-   // m_climber.setDefaultCommand(m_manualClimb);
+    // m_climber.setDefaultCommand(m_manualClimb);
     m_endEffector.setDefaultCommand(m_manualEndEffector);
     m_elevator.setDefaultCommand(m_manualElevator);
-    m_sourceIntake.setDefaultCommand(m_manualSourceIntake);
+    //m_sourceIntake.setDefaultCommand(m_manualSourceIntake);
     m_leds.setDefaultCommand(m_coralLEDs);
 
   }
@@ -284,6 +288,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    // TODO:
 
     // ================
     // Driver Controls
@@ -291,21 +296,35 @@ public class RobotContainer {
 
     /* Drivetrain */
 
-    //Button.cont1_options.onTrue(m_resetFieldOrientedHeading);
+    Button.cont1_controlPadUp.onTrue(m_resetFieldOrientedHeading);
     //Button.controlPadLeft1.whileTrue(m_sysIDDriveRoutine);
     //Button.leftTrigger1.whileTrue(m_alignAndScoreCoral);
     //Button.buttonX.whileTrue(m_alignAndGetAlgae);
     //Button.buttonA.whileTrue(m_alignAndGetCoral);
+
+    
     
 
     /* Elevator */
-    //Button.psButton1.onTrue(m_elevatorToStow);
+    Button.cont1_plus.onTrue(m_elevatorToStow);
+    Button.cont1_buttonA.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelOne, m_moveToLevelParallel), 
+    m_processAlgae, () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_buttonB.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelThree, m_moveToLevelParallel), 
+    new SequentialCommandGroup(m_setUpperAlgae, m_toAlgaeHigher), () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_buttonX.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelTwo, m_moveToLevelParallel), 
+    new SequentialCommandGroup(m_setLowerAlgae, m_toAlgaeLower), () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_buttonY.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelFour, m_moveToLevelParallel), 
+    m_bargeAlgae, () -> (EndEffector.hasCoral() == true)));
 
     /* Scoring */
+    Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
+    Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);
+    //Button.cont1_leftTrigger.onTrue(); TODO Stow + Ground Intake
+    
+    //Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
+    //    () -> (Elevator.getCoralLevel() == Level.LEVEL4)));
     /*
-    Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
-        () -> (Elevator.getCoralLevel() == Level.LEVEL4)));
-
     Button.buttonB.onTrue(new ConditionalCommand(m_toAlgaeLower, m_toAlgaeHigher,
         () -> (Elevator.getAlgaeLevel().height - m_elevator.getPositions()[0] < 0)));
     Button.buttonY.onTrue(m_clampAlgae);
@@ -319,34 +338,47 @@ public class RobotContainer {
     // ==================
 
     /* End Effector */
-    /*
-    Button.buttonY2.onTrue(m_intakeAdjustment);
-    Button.buttonY2.onFalse(m_goToSourceIntakeAngle1);
-    Button.buttonY2.onFalse(m_indexCoral);
+    
+    //Button.buttonY2.onTrue(m_intakeAdjustment);
+    //Button.buttonY2.onFalse(m_goToSourceIntakeAngle1);
+    //Button.buttonY2.onFalse(m_indexCoral);
+    Button.cont2_rightBumper.onTrue(m_IntakeAlgae);
+    Button.cont2_rightTrigger.onTrue(m_OutakeAlgae);
+
+
+    /* Intake */
+
+    // Todo implement later
+    //Button.cont2_minus.onTrue(new InstantCommand(
+    //    () -> m_sourceIntake.setEncoderPosition(0), m_sourceIntake));
+
 
     /* Elevator */
-    /*
-    Button.controlPadDown2.onTrue(m_setLevelOne);
-    Button.back.onTrue(m_setLevelOneB);
-    Button.controlPadLeft2.onTrue(m_setLevelTwo);
-    Button.controlPadRight2.onTrue(m_setLevelThree);
-    Button.controlPadUp2.onTrue(m_setLevelFour);
-    Button.buttonX2.onTrue(m_elevatorToStow);
+    
+    Button.cont2_rightStickClick.onTrue(m_elevatorToStow);
+    Button.cont2_buttonY.onTrue(m_bargeAlgae);
+    //Button.controlPadDown2.onTrue(m_setLevelOne);
+    //Button.back.onTrue(m_setLevelOneB);
+    //Button.controlPadLeft2.onTrue(m_setLevelTwo);
+    //Button.controlPadRight2.onTrue(m_setLevelThree);
+    //Button.controlPadUp2.onTrue(m_setLevelFour);
+    //Button.buttonX2.onTrue(m_elevatorToStow);
 
-    Button.start.onTrue(new InstantCommand(
+    Button.cont2_plus.onTrue(new InstantCommand(
         () -> m_elevator.setEncoderPosition(0), m_elevator));
 
-    Button.buttonA2.whileTrue(m_manualFeed);
-    Button.buttonB2.onTrue(m_goToSourceIntakeAngle2);
+    //Button.buttonA2.whileTrue(m_manualFeed);
+    //Button.buttonB2.onTrue(m_goToSourceIntakeAngle2);
 
     /* Scoring */
-    /*
-    Button.leftBumper2.onTrue(m_setLowerAlgae);
-    Button.rightBumper2.onTrue(m_setUpperAlgae);
-    Button.rightTrigger2.onTrue(m_bargeAlgae);
-    Button.rightTrigger2.onFalse(m_bargeAlgaeThrow);
-    Button.leftTrigger2.onTrue(m_processAlgae);
-    */
+    
+    Button.cont2_buttonB.onTrue(m_setLowerAlgae);
+    Button.cont2_buttonX.onTrue(m_setUpperAlgae);
+
+    //Button.rightTrigger2.onTrue(m_bargeAlgae);
+    //Button.rightTrigger2.onFalse(m_bargeAlgaeThrow);
+    Button.cont2_buttonA.onTrue(m_processAlgae);
+    
 
     robotTipping.onTrue(m_elevatorEmergencyStow);
   }
