@@ -25,10 +25,11 @@ public class DriveCommand extends Command {
 
   private final boolean m_isOpenLoop;
   private boolean m_isFieldRelative;
+  private boolean m_isSlowMode;
 
   //private final PIDController rotationController;
 
-  public DriveCommand(Drivetrain drivetrain, XboxController driverController, boolean isOpenLoop) {
+  public DriveCommand(Drivetrain drivetrain, XboxController driverController, boolean isOpenLoop, boolean isSlowMode) {
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
@@ -38,6 +39,8 @@ public class DriveCommand extends Command {
     m_driverController = driverController;
 
     m_isOpenLoop = isOpenLoop;
+
+    m_isSlowMode = isSlowMode;
 
     translationFilter = new PolarJoystickFilter(new JoystickFilterConfig(
         0.07,
@@ -81,10 +84,17 @@ public class DriveCommand extends Command {
       rotationFF *= 0.5;
     }
 
-    m_drivetrain.drive(
+    if(m_isSlowMode == true){
+      m_drivetrain.drive(
+        new Transform2d(translationX / 2, translationY / 2, new Rotation2d(rotationFF / 2)),
+        m_isOpenLoop,
+        m_isFieldRelative);
+    } else{
+      m_drivetrain.drive(
         new Transform2d(translationX, translationY, new Rotation2d(rotationFF)),
         m_isOpenLoop,
         m_isFieldRelative);
+    }
 
   }
 
