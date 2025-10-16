@@ -73,6 +73,7 @@ public class RobotContainer {
   /* Drivetrain */
   public final DriveCommand m_swerveDriveOpenLoop;
   public final DriveCommand m_swerveDriveClosedLoop;
+  public final DriveCommand m_swerveDriveClosedLoopSlowMode;
   public final RunDutyCycle m_setDrivePercentOutput;
   public final ResetFieldOrientedHeading m_resetFieldOrientedHeading;
   public final Command m_sysIDDriveRoutine;
@@ -129,7 +130,8 @@ public class RobotContainer {
 
   /* Triggers */
   public final Trigger robotTipping;
-  //public final Trigger slowModeTrigger;
+  public final Trigger slowModeTrigger;
+  public final Trigger algaeIntakeTrigger;
 
   /* Tests */
   public final DrivetrainTest m_drivetrainTest;
@@ -188,8 +190,9 @@ public class RobotContainer {
     // ==========================
 
     /* Drivetrain */
-    m_swerveDriveOpenLoop = new DriveCommand(m_drivetrain, driverController, true);
-    m_swerveDriveClosedLoop = new DriveCommand(m_drivetrain, driverController, false);
+    m_swerveDriveOpenLoop = new DriveCommand(m_drivetrain, driverController, true, false);
+    m_swerveDriveClosedLoop = new DriveCommand(m_drivetrain, driverController, false, false);
+    m_swerveDriveClosedLoopSlowMode = new DriveCommand(m_drivetrain, driverController, false, true);
     m_setDrivePercentOutput = new RunDutyCycle(m_drivetrain, 0.10, 0);
     m_resetFieldOrientedHeading = new ResetFieldOrientedHeading(m_drivetrain);
     m_sysIDDriveRoutine = new DeferredCommand(m_drivetrain::getSysIDDriveRoutine, Set.of(m_drivetrain));
@@ -259,7 +262,8 @@ public class RobotContainer {
 
     /* Triggers */
     robotTipping = new Trigger(() -> m_drivetrain.getRoll() > 20 || m_drivetrain.getPitch() > 20);
-    //slowModeTrigger = new Trigger(() -> );
+    slowModeTrigger = new Trigger(() -> Button.cont1_leftBumper.getAsBoolean() && Button.cont1_rightBumper.getAsBoolean());
+    algaeIntakeTrigger = new Trigger(() -> Button.cont1_leftTrigger.getAsBoolean() && Button.cont1_rightTrigger.getAsBoolean());
 
     // Configure the trigger bindings
     configureBindings();
@@ -297,6 +301,7 @@ public class RobotContainer {
     /* Drivetrain */
 
     Button.cont1_controlPadUp.onTrue(m_resetFieldOrientedHeading);
+    slowModeTrigger.onTrue(m_swerveDriveClosedLoopSlowMode);
     //Button.controlPadLeft1.whileTrue(m_sysIDDriveRoutine);
     //Button.leftTrigger1.whileTrue(m_alignAndScoreCoral);
     //Button.buttonX.whileTrue(m_alignAndGetAlgae);
@@ -320,6 +325,10 @@ public class RobotContainer {
     Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, () -> (EndEffector.hasCoral() == true)));
     Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
     Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);
+
+    /* TODO */
+    algaeIntakeTrigger.onTrue(null);
+    algaeIntakeTrigger.onFalse(null);
     //Button.cont1_leftTrigger.onTrue(); TODO Stow + Ground Intake
     
     //Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
