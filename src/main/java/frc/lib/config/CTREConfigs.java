@@ -12,7 +12,7 @@ public final class CTREConfigs {
     public final TalonFXConfiguration positionalFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration climberFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration elevatorFXConfig = new TalonFXConfiguration();
-    public final TalonFXConfiguration sourceIntakeFXConfig = new TalonFXConfiguration();
+    public final TalonFXConfiguration groundIntakeFXConfig = new TalonFXConfiguration();
 
     public CTREConfigs() {
 
@@ -146,12 +146,12 @@ public final class CTREConfigs {
         /* ================================ */
 
         /* Motor Invert and Neutral Mode */
-        var sourceIntakeMotorOutput = sourceIntakeFXConfig.MotorOutput;
+        var sourceIntakeMotorOutput = groundIntakeFXConfig.MotorOutput;
         sourceIntakeMotorOutput.Inverted = Constants.kSourceIntake.MOTOR_INVERT;
         sourceIntakeMotorOutput.NeutralMode = Constants.kSourceIntake.MOTOR_IDLE_MODE;
 
         /* Current Limiting */
-        var sourceIntakeCurrentLimits = sourceIntakeFXConfig.CurrentLimits;
+        var sourceIntakeCurrentLimits = groundIntakeFXConfig.CurrentLimits;
         sourceIntakeCurrentLimits.SupplyCurrentLimitEnable = Constants.kSourceIntake.ENABLE_SUPPLY_CURRENT_LIMIT;
         sourceIntakeCurrentLimits.SupplyCurrentLimit = Constants.kSourceIntake.SUPPLY_CURRENT_LIMIT;
         sourceIntakeCurrentLimits.SupplyCurrentLowerLimit = Constants.kSourceIntake.SUPPLY_CURRENT_LOWER_LIMIT;
@@ -160,7 +160,7 @@ public final class CTREConfigs {
         sourceIntakeCurrentLimits.StatorCurrentLimitEnable = Constants.kSourceIntake.ENABLE_STATOR_CURRENT_LIMIT;
         sourceIntakeCurrentLimits.StatorCurrentLimit = Constants.kSourceIntake.STATOR_CURRENT_LIMIT;
 
-        var sourceIntakeFXSlot0 = sourceIntakeFXConfig.Slot0;
+        var sourceIntakeFXSlot0 = groundIntakeFXConfig.Slot0;
         sourceIntakeFXSlot0.kP = Constants.kSourceIntake.KP;
         sourceIntakeFXSlot0.kI = Constants.kSourceIntake.KI;
         sourceIntakeFXSlot0.kD = Constants.kSourceIntake.KD;

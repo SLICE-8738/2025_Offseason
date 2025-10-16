@@ -31,7 +31,7 @@ private final DutyCycleEncoder m_absoluteEncoder;
       GravityTypeValue.Arm_Cosine,
       Constants.kSourceIntake.POSITION_CONVERSION_FACTOR, 
       Constants.kSourceIntake.VELOCITY_CONVERSION_FACTOR, 
-      Constants.CTRE_CONFIGS.sourceIntakeFXConfig);
+      Constants.CTRE_CONFIGS.groundIntakeFXConfig);
 
     m_absoluteEncoder = new DutyCycleEncoder(Constants.kSourceIntake.ABSOLUTE_ENCODER_ID, Constants.kSourceIntake.ABSOLUTE_ENCODER_RANGE, 0);
 

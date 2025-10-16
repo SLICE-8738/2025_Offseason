@@ -35,7 +35,6 @@ import frc.robot.commands.SourceIntake.RotateSourceIntake;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.drivetrain.*;
 import frc.robot.testing.routines.DrivetrainTest;
-import frc.robot.testing.routines.HelloTest;
 
 /**
  * This class is where the bulk of the robot should be declared. Since

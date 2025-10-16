@@ -363,6 +363,18 @@ public final class Constants {
 
   }
 
+  public final class kGroundIntake {
+
+    public static final int ROTATION_MOTOR = 13;
+    public static final int INTAKE_MOTOR = 14;
+    public static final int CAN_RANGE_ID = 0;
+
+    public static final double POSITION_CONVERSION_FACTOR = 360.0;
+    public static final double VELOCITY_CONVERSION_FACTOR = POSITION_CONVERSION_FACTOR;
+    public static final double SENSOR_TO_MECHANISM_RATIO = 49.5;
+    
+  }
+
   public final class kSourceIntake {
 
     public static final int ROTATION_MOTOR = 13; // TODO find actual motor port number
