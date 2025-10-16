@@ -21,7 +21,7 @@ private final DutyCycleEncoder m_absoluteEncoder;
   /** Creates a new SourceIntake. */
   public SourceIntake() {
     super(
-      new int[] {Constants.kSourceIntake.MOTOR_PORT}, 
+      new int[] {Constants.kSourceIntake.INTAKE_MOTOR, Constants.kSourceIntake.ROTATION_MOTOR}, 
       new boolean[] {true}, 
       Constants.kSourceIntake.KP, 
       Constants.kSourceIntake.KI, 

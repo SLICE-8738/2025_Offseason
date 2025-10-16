@@ -365,7 +365,8 @@ public final class Constants {
 
   public final class kSourceIntake {
 
-    public static final int MOTOR_PORT = 13; // TODO find actual motor port number
+    public static final int ROTATION_MOTOR = 13; // TODO find actual motor port number
+    public static final int INTAKE_MOTOR = 14;
     public static final int ABSOLUTE_ENCODER_ID = 4;
     public static final double ABSOLUTE_ENCODER_OFFSET = 364;
     public static final double ABSOLUTE_ENCODER_RANGE = 404.4;
