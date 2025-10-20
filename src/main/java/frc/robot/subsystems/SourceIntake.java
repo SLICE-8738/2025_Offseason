@@ -22,7 +22,7 @@ private final DutyCycleEncoder m_absoluteEncoder;
   public SourceIntake() {
     super(
       new int[] {Constants.kSourceIntake.INTAKE_MOTOR, Constants.kSourceIntake.ROTATION_MOTOR}, 
-      new boolean[] {true}, 
+      new boolean[] {true, true}, 
       Constants.kSourceIntake.KP, 
       Constants.kSourceIntake.KI, 
       Constants.kSourceIntake.KD, 

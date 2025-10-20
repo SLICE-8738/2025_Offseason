@@ -311,14 +311,14 @@ public class RobotContainer {
 
     /* Elevator */
     Button.cont1_plus.onTrue(m_elevatorToStow);
-    Button.cont1_buttonA.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelOne, m_moveToLevelParallel), 
+    Button.cont1_buttonA.onTrue(new ConditionalCommand(m_setLevelOne.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)),
     m_processAlgae, () -> (EndEffector.hasCoral() == true)));
-    Button.cont1_buttonB.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelThree, m_moveToLevelParallel), 
+    Button.cont1_buttonB.onTrue(new ConditionalCommand(m_setLevelTwo.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), 
     new SequentialCommandGroup(m_setUpperAlgae, m_toAlgaeHigher), () -> (EndEffector.hasCoral() == true)));
-    Button.cont1_buttonX.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelTwo, m_moveToLevelParallel), 
+    Button.cont1_buttonX.onTrue(new ConditionalCommand(m_setLevelThree.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), 
     new SequentialCommandGroup(m_setLowerAlgae, m_toAlgaeLower), () -> (EndEffector.hasCoral() == true)));
-    Button.cont1_buttonY.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLevelFour, m_moveToLevelParallel), 
-    m_bargeAlgae, () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_buttonY.onTrue(new ConditionalCommand(m_setLevelFour.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), 
+    new BargeAlgae(m_endEffector, m_elevator), () -> (EndEffector.hasCoral() == true)));
 
     /* Scoring */
     Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, () -> (EndEffector.hasCoral() == true)));
@@ -326,8 +326,8 @@ public class RobotContainer {
     Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);
 
     /* TODO */
-    algaeIntakeTrigger.onTrue(null);
-    algaeIntakeTrigger.onFalse(null);
+    //algaeIntakeTrigger.onTrue(null);
+    //algaeIntakeTrigger.onFalse(null);
     //Button.cont1_leftTrigger.onTrue(); TODO Stow + Ground Intake
     
     //Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
@@ -335,11 +335,6 @@ public class RobotContainer {
     /*
     Button.buttonB.onTrue(new ConditionalCommand(m_toAlgaeLower, m_toAlgaeHigher,
         () -> (Elevator.getAlgaeLevel().height - m_elevator.getPositions()[0] < 0)));
-    Button.buttonY.onTrue(m_clampAlgae);
-
-    Button.buttonA.onTrue(m_goToSourceIntakeAngle1);
-    Button.buttonA.onTrue(m_indexCoral);
-    Button.rightTrigger1.onTrue(m_scoreCoral);
 
     // ==================
     // Operator Controls
@@ -350,7 +345,7 @@ public class RobotContainer {
     //Button.buttonY2.onTrue(m_intakeAdjustment);
     //Button.buttonY2.onFalse(m_goToSourceIntakeAngle1);
     //Button.buttonY2.onFalse(m_indexCoral);
-    Button.cont2_rightBumper.onTrue(m_IntakeAlgae);
+    Button.cont2_rightBumper.whileTrue(m_IntakeAlgae);
     Button.cont2_rightTrigger.onTrue(m_OutakeAlgae);
 
 
@@ -365,27 +360,19 @@ public class RobotContainer {
     
     Button.cont2_rightStickClick.onTrue(m_elevatorToStow);
     Button.cont2_buttonY.onTrue(m_bargeAlgae);
-    //Button.controlPadDown2.onTrue(m_setLevelOne);
-    //Button.back.onTrue(m_setLevelOneB);
-    //Button.controlPadLeft2.onTrue(m_setLevelTwo);
-    //Button.controlPadRight2.onTrue(m_setLevelThree);
-    //Button.controlPadUp2.onTrue(m_setLevelFour);
-    //Button.buttonX2.onTrue(m_elevatorToStow);
+
 
     Button.cont2_plus.onTrue(new InstantCommand(
         () -> m_elevator.setEncoderPosition(0), m_elevator));
 
-    //Button.buttonA2.whileTrue(m_manualFeed);
-    //Button.buttonB2.onTrue(m_goToSourceIntakeAngle2);
 
     /* Scoring */
     
-    Button.cont2_buttonB.onTrue(m_setLowerAlgae);
-    Button.cont2_buttonX.onTrue(m_setUpperAlgae);
+    //TODO
+    //Button.cont2_buttonB.onTrue(m_setLowerAlgae);
+    //Button.cont2_buttonX.onTrue(m_setUpperAlgae);
 
-    //Button.rightTrigger2.onTrue(m_bargeAlgae);
-    //Button.rightTrigger2.onFalse(m_bargeAlgaeThrow);
-    Button.cont2_buttonA.onTrue(m_processAlgae);
+    //Button.cont2_buttonA.onTrue(m_processAlgae);
     
 
     robotTipping.onTrue(m_elevatorEmergencyStow);

@@ -46,10 +46,10 @@ public class Button {
     public static Trigger cont2_rightBumper = new JoystickButton(controller2, 6);
     public static Trigger cont2_leftTrigger =  new Trigger(() -> {return controller1.getRawAxis(2) > 0.35; });
     public static Trigger cont2_rightTrigger =  new Trigger(() -> {return controller1.getRawAxis(3) > 0.35; });
-    public static Trigger cont2_minus = new JoystickButton(controller2, 9);
-    public static Trigger cont2_plus = new JoystickButton(controller2, 10);
-    public static Trigger cont2_leftStickClick = new JoystickButton(controller2, 11);
-    public static Trigger cont2_rightStickClick = new JoystickButton(controller2, 12);
+    public static Trigger cont2_minus = new JoystickButton(controller2, 7);
+    public static Trigger cont2_plus = new JoystickButton(controller2, 8);
+    public static Trigger cont2_leftStickClick = new JoystickButton(controller2, 9);
+    public static Trigger cont2_rightStickClick = new JoystickButton(controller2, 10);
     public static Trigger cont2_controlPadRight = new POVButton(controller2, 90);
     public static Trigger cont2_controlPadUp = new POVButton(controller2, 0);
     public static Trigger cont2_controlPadLeft = new POVButton(controller2, 270);
