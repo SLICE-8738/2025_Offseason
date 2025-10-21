@@ -4,10 +4,13 @@
 
 package frc.robot.subsystems;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix6.hardware.CANrange;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.TalonFXPositionalSubsystem;
 import frc.lib.config.CTREConfigs;
@@ -58,8 +61,15 @@ public class GroundIntake extends TalonFXPositionalSubsystem {
     setEncoderPosition(DEFAULT_POSITION);
   }
 
+  public void movePlacementMotor(double speed){
+    intakeMotor.set(speed);
+  }
+
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    // This method will be called once per schedulerun
+    SmartDashboard.putNumber("Ground Intake Relative Angle", getPositions()[0]);
+
+    Logger.recordOutput("Ground Intake/Current Command", getCurrentCommand() == null ? "Nothing" : getCurrentCommand().getName());
   }
 }

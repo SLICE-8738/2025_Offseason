@@ -4,24 +4,19 @@
 
 package frc.robot.commands.GroundIntake;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.GroundIntake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ManualRotateGroundIntake extends Command {
+public class SpinPlacementMotors extends Command {
 
   private GroundIntake m_GroundIntake;
-  private GenericHID m_Controller;
 
-  private double axis;
-  private boolean maintaining;
 
-  /** Creates a new ManualRotateGroundIntake. */
-  public ManualRotateGroundIntake(GroundIntake intake, GenericHID controller) {
+  /** Creates a new ManualPlacementGroundIntakeMotor. */
+  public SpinPlacementMotors(GroundIntake intake) {
     m_GroundIntake = intake;
-    m_Controller = controller;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_GroundIntake);
   }
@@ -35,36 +30,13 @@ public class ManualRotateGroundIntake extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    axis = MathUtil.applyDeadband(m_Controller.getRawAxis(5),0.1);
-    if (axis == 0) {
-      if (!maintaining) {
-        m_GroundIntake.set(0);
-        m_GroundIntake.maintainPosition();
-      }
-      maintaining = true;
-    } 
-    // TODO add in angle hardstop parameters
-    else {
-      maintaining = false;
-      m_GroundIntake.set(axis * 0.25);
-      /* 
-      maintaining = false;
-      if(axis < 0){
-        m_GroundIntake.set(0);
-      }
-      else if(axis > 1){
-        m_GroundIntake.set(0);
-      }else {
-        m_GroundIntake.set(axis * 0.25);
-      }
-      */
-    }
+    m_GroundIntake.movePlacementMotor(-0.75);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_GroundIntake.set(0);
+    m_GroundIntake.movePlacementMotor(0);
     super.end(interrupted);
   }
 

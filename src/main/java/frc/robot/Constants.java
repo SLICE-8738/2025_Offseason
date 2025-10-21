@@ -372,7 +372,7 @@ public final class Constants {
     /* Conversion Factors */
     public static final double POSITION_CONVERSION_FACTOR = 360.0;
     public static final double VELOCITY_CONVERSION_FACTOR = POSITION_CONVERSION_FACTOR;
-    public static final double SENSOR_TO_MECHANISM_RATIO = 49.5;
+    public static final double SENSOR_TO_MECHANISM_RATIO = 49.5;//1 / 49.5;
 
     /* PID */
     public static final double KP = 1.0;

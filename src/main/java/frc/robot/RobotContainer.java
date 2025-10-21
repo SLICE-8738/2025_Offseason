@@ -34,6 +34,7 @@ import frc.robot.commands.EndEffector.ManualFeedCommand;
 import frc.robot.commands.EndEffector.OutakeAlgae;
 import frc.robot.commands.EndEffector.ScoreCoral;
 import frc.robot.commands.GroundIntake.ManualRotateGroundIntake;
+import frc.robot.commands.GroundIntake.SpinPlacementMotors;
 import frc.robot.commands.LEDs.CoralLEDs;
 import frc.robot.commands.Scoring.AlignAndGetAlgae;
 import frc.robot.commands.Scoring.AlignAndGetCoral;
@@ -51,6 +52,7 @@ import frc.robot.commands.SourceIntake.ManualRotateSourceIntake;
 import frc.robot.commands.SourceIntake.RotateSourceIntake;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
+import frc.robot.subsystems.GroundIntake;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.SourceIntake;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -150,6 +152,7 @@ public class RobotContainer {
 
   /* Ground Intake */
   public final ManualRotateGroundIntake m_manualRotateGroundIntake;
+  public final SpinPlacementMotors m_spinPlacementMotors;
 
   /* LEDs */
   public final CoralLEDs m_coralLEDs;
@@ -274,6 +277,7 @@ public class RobotContainer {
 
     /* Ground Intake */
     m_manualRotateGroundIntake = new ManualRotateGroundIntake(m_groundIntake, operatorController);
+    m_spinPlacementMotors = new SpinPlacementMotors(m_groundIntake);
 
     /* Climber */
   //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
@@ -378,15 +382,12 @@ public class RobotContainer {
     // ==================
 
     /* End Effector */
-    
-    //Button.buttonY2.onTrue(m_intakeAdjustment);
-    //Button.buttonY2.onFalse(m_goToSourceIntakeAngle1);
-    //Button.buttonY2.onFalse(m_indexCoral);
     Button.cont2_rightBumper.whileTrue(m_IntakeAlgae);
     Button.cont2_rightTrigger.onTrue(m_OutakeAlgae);
 
 
     /* Intake */
+    Button.cont2_controlPadDown.whileTrue(m_spinPlacementMotors);
 
     // Todo implement later
     //Button.cont2_minus.onTrue(new InstantCommand(
