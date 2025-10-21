@@ -6,9 +6,6 @@ package frc.robot;
 
 import java.util.Set;
 
-import javax.xml.stream.events.EndElement;
-
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,23 +14,48 @@ import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
 import frc.robot.Constants.Mode;
 import frc.robot.Constants.kElevator.Level;
 import frc.robot.Constants.kElevator.LevelType;
 //import frc.robot.commands.Climber.*;
-import frc.robot.commands.Drivetrain.*;
+import frc.robot.commands.Drivetrain.DriveCommand;
+import frc.robot.commands.Drivetrain.ResetFieldOrientedHeading;
+import frc.robot.commands.Drivetrain.RunDutyCycle;
 import frc.robot.commands.Elevator.ManualElevator;
-import frc.robot.commands.EndEffector.*;
+import frc.robot.commands.EndEffector.BargeAlgaeThrow;
+import frc.robot.commands.EndEffector.BumpAlgae;
+import frc.robot.commands.EndEffector.ClampAlgae;
+import frc.robot.commands.EndEffector.IndexSequence;
+import frc.robot.commands.EndEffector.IntakeAlgae;
+import frc.robot.commands.EndEffector.ManualEndEffector;
+import frc.robot.commands.EndEffector.ManualFeedCommand;
+import frc.robot.commands.EndEffector.OutakeAlgae;
+import frc.robot.commands.EndEffector.ScoreCoral;
 import frc.robot.commands.LEDs.CoralLEDs;
-import frc.robot.commands.Scoring.*;
+import frc.robot.commands.Scoring.AlignAndGetAlgae;
+import frc.robot.commands.Scoring.AlignAndGetCoral;
+import frc.robot.commands.Scoring.AlignAndScoreCoral;
+import frc.robot.commands.Scoring.BargeAlgae;
+import frc.robot.commands.Scoring.IntakeAdjustment;
+import frc.robot.commands.Scoring.MoveToLevel;
+import frc.robot.commands.Scoring.MoveToLevelParallel;
+import frc.robot.commands.Scoring.ProcessAlgae;
+import frc.robot.commands.Scoring.ResetRelativeEncoders;
+import frc.robot.commands.Scoring.SetLevel;
+import frc.robot.commands.Scoring.ToAlgae;
+import frc.robot.commands.Scoring.ToStow;
 import frc.robot.commands.SourceIntake.ManualRotateSourceIntake;
 import frc.robot.commands.SourceIntake.RotateSourceIntake;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.drivetrain.*;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.EndEffector;
+import frc.robot.subsystems.LEDs;
+import frc.robot.subsystems.SourceIntake;
+import frc.robot.subsystems.drivetrain.Drivetrain;
+import frc.robot.subsystems.drivetrain.RealSwerveModuleIO;
+import frc.robot.subsystems.drivetrain.SimSwerveModuleIO;
+import frc.robot.subsystems.drivetrain.SwerveModuleIO;
 import frc.robot.testing.routines.DrivetrainTest;
 
 /**
@@ -300,7 +322,8 @@ public class RobotContainer {
     /* Drivetrain */
 
     Button.cont1_controlPadUp.onTrue(m_resetFieldOrientedHeading);
-    slowModeTrigger.onTrue(m_swerveDriveClosedLoopSlowMode);
+    Button.cont1_leftStickClick1.whileTrue(m_swerveDriveClosedLoopSlowMode);
+
     //Button.controlPadLeft1.whileTrue(m_sysIDDriveRoutine);
     //Button.leftTrigger1.whileTrue(m_alignAndScoreCoral);
     //Button.buttonX.whileTrue(m_alignAndGetAlgae);
@@ -320,11 +343,15 @@ public class RobotContainer {
     Button.cont1_buttonY.onTrue(new ConditionalCommand(m_setLevelFour.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), 
     new BargeAlgae(m_endEffector, m_elevator), () -> (EndEffector.hasCoral() == true)));
 
+    Button.cont1_rightStickClick1.whileTrue(m_alignAndGetAlgae);
+    Button.cont1_rightStickClick1.onFalse(m_clampAlgae);
+
     /* Scoring */
     Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, () -> (EndEffector.hasCoral() == true)));
-    Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
-    Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);
+    //Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
+    //Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);
 
+ 
     /* TODO */
     //algaeIntakeTrigger.onTrue(null);
     //algaeIntakeTrigger.onFalse(null);
