@@ -25,9 +25,9 @@ public class GroundIntake extends TalonFXPositionalSubsystem {
   public GroundIntake() {
     super(new int[] {Constants.kGroundIntake.ROTATION_MOTOR}, 
     new boolean[] {true}, 
-    Constants.kSourceIntake.KP, 
-    Constants.kSourceIntake.KI, 
-    Constants.kSourceIntake.KD, 
+    Constants.kGroundIntake.KP, 
+    Constants.kGroundIntake.KI, 
+    Constants.kGroundIntake.KD, 
     0.1, 
     Constants.kGroundIntake.SENSOR_TO_MECHANISM_RATIO, 
     GravityTypeValue.Arm_Cosine, 
@@ -38,6 +38,24 @@ public class GroundIntake extends TalonFXPositionalSubsystem {
     intakeMotor = new TalonFX(Constants.kGroundIntake.INTAKE_MOTOR);
     coralDetector = new CANrange(Constants.kGroundIntake.CAN_RANGE_ID);
 
+  }
+
+  public double getDefaultPosition(){
+    return DEFAULT_POSITION;
+  }
+
+/**
+   * Sets the current position as a PID setpoint
+   * and automatically applies anti-gravity feedforward
+   */
+  public void maintainPosition() {
+    if (getPositionTargetReference() != getPositions()[0]) {
+      setPosition(getPositions()[0]);
+    }
+  }
+
+  public void resetRelativeEncoder(){
+    setEncoderPosition(DEFAULT_POSITION);
   }
 
   @Override

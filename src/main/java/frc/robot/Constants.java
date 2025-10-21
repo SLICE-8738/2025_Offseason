@@ -367,17 +367,23 @@ public final class Constants {
 
     public static final int ROTATION_MOTOR = 13;
     public static final int INTAKE_MOTOR = 14;
-    public static final int CAN_RANGE_ID = 0;
+    public static final int CAN_RANGE_ID = 0; // TODO find ID number
 
+    /* Conversion Factors */
     public static final double POSITION_CONVERSION_FACTOR = 360.0;
     public static final double VELOCITY_CONVERSION_FACTOR = POSITION_CONVERSION_FACTOR;
     public static final double SENSOR_TO_MECHANISM_RATIO = 49.5;
+
+    /* PID */
+    public static final double KP = 1.0;
+    public static final double KI = 0; // 0.01;
+    public static final double KD = 0; // 0.1;
     
   }
 
   public final class kSourceIntake {
 
-    public static final int ROTATION_MOTOR = 13; // TODO find actual motor port number
+    public static final int ROTATION_MOTOR = 13;
     public static final int INTAKE_MOTOR = 14;
     public static final int ABSOLUTE_ENCODER_ID = 4;
     public static final double ABSOLUTE_ENCODER_OFFSET = 364;
