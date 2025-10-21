@@ -33,6 +33,7 @@ import frc.robot.commands.EndEffector.ManualEndEffector;
 import frc.robot.commands.EndEffector.ManualFeedCommand;
 import frc.robot.commands.EndEffector.OutakeAlgae;
 import frc.robot.commands.EndEffector.ScoreCoral;
+import frc.robot.commands.GroundIntake.ManualRotateGroundIntake;
 import frc.robot.commands.LEDs.CoralLEDs;
 import frc.robot.commands.Scoring.AlignAndGetAlgae;
 import frc.robot.commands.Scoring.AlignAndGetCoral;
@@ -82,6 +83,7 @@ public class RobotContainer {
   public final EndEffector m_endEffector;
   public final SourceIntake m_sourceIntake;
   public final LEDs m_leds;
+  public final GroundIntake m_groundIntake;
 
   public final AutoSelector m_autoSelector;
   public final ReefPositionSelector m_reefPositionSelector;
@@ -146,6 +148,9 @@ public class RobotContainer {
   public final RotateSourceIntake m_goToSourceIntakeAngle1;
   public final RotateSourceIntake m_goToSourceIntakeAngle2;
 
+  /* Ground Intake */
+  public final ManualRotateGroundIntake m_manualRotateGroundIntake;
+
   /* LEDs */
   public final CoralLEDs m_coralLEDs;
 
@@ -199,6 +204,7 @@ public class RobotContainer {
     m_endEffector = new EndEffector();
     m_elevator = new Elevator();
     m_sourceIntake = new SourceIntake();
+    m_groundIntake = new GroundIntake();
     //m_climber = new Climber();
     m_leds = new LEDs();
 
@@ -266,6 +272,9 @@ public class RobotContainer {
     m_goToSourceIntakeAngle1 = new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.INTAKE_ANGLE);
     m_goToSourceIntakeAngle2 = new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.CLIMB_ANGLE);
 
+    /* Ground Intake */
+    m_manualRotateGroundIntake = new ManualRotateGroundIntake(m_groundIntake, operatorController);
+
     /* Climber */
   //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
     // The climb command is created with a WaitCommand before it so that the climber
@@ -293,6 +302,7 @@ public class RobotContainer {
     // m_climber.setDefaultCommand(m_manualClimb);
     m_endEffector.setDefaultCommand(m_manualEndEffector);
     m_elevator.setDefaultCommand(m_manualElevator);
+    m_groundIntake.setDefaultCommand(m_manualRotateGroundIntake);
     //m_sourceIntake.setDefaultCommand(m_manualSourceIntake);
     m_leds.setDefaultCommand(m_coralLEDs);
 
