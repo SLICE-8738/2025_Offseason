@@ -152,7 +152,8 @@ public class RobotContainer {
 
   /* Ground Intake */
   public final ManualRotateGroundIntake m_manualRotateGroundIntake;
-  public final SpinPlacementMotors m_spinPlacementMotors;
+  public final SpinPlacementMotors m_moveIntake;
+  public final SpinPlacementMotors m_moveIntakeReversed;
 
   /* LEDs */
   public final CoralLEDs m_coralLEDs;
@@ -277,7 +278,8 @@ public class RobotContainer {
 
     /* Ground Intake */
     m_manualRotateGroundIntake = new ManualRotateGroundIntake(m_groundIntake, operatorController);
-    m_spinPlacementMotors = new SpinPlacementMotors(m_groundIntake);
+    m_moveIntake = new SpinPlacementMotors(m_groundIntake, true);
+    m_moveIntakeReversed = new SpinPlacementMotors(m_groundIntake, false);
 
     /* Climber */
   //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
@@ -350,10 +352,10 @@ public class RobotContainer {
     Button.cont1_plus.onTrue(m_elevatorToStow);
     Button.cont1_buttonA.onTrue(new ConditionalCommand(m_setLevelOne.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)),
     m_processAlgae, () -> (EndEffector.hasCoral() == true)));
-    Button.cont1_buttonB.onTrue(new ConditionalCommand(m_setLevelTwo.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), 
-    new SequentialCommandGroup(m_setUpperAlgae, m_toAlgaeHigher), () -> (EndEffector.hasCoral() == true)));
-    Button.cont1_buttonX.onTrue(new ConditionalCommand(m_setLevelThree.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), 
-    new SequentialCommandGroup(m_setLowerAlgae, m_toAlgaeLower), () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_buttonB.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setUpperAlgae, m_toAlgaeHigher), 
+    m_setLevelTwo.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_buttonX.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setLowerAlgae, m_toAlgaeLower), 
+    m_setLevelThree.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), () -> (EndEffector.hasCoral() == true)));
     Button.cont1_buttonY.onTrue(new ConditionalCommand(m_setLevelFour.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)), 
     new BargeAlgae(m_endEffector, m_elevator), () -> (EndEffector.hasCoral() == true)));
 
@@ -385,9 +387,9 @@ public class RobotContainer {
     Button.cont2_rightBumper.whileTrue(m_IntakeAlgae);
     Button.cont2_rightTrigger.onTrue(m_OutakeAlgae);
 
-
     /* Intake */
-    Button.cont2_controlPadDown.whileTrue(m_spinPlacementMotors);
+    Button.cont2_leftBumper.whileTrue(m_moveIntake);
+    Button.cont2_leftTrigger.whileTrue(m_moveIntakeReversed);
 
     // Todo implement later
     //Button.cont2_minus.onTrue(new InstantCommand(

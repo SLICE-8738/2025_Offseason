@@ -12,11 +12,14 @@ import frc.robot.subsystems.GroundIntake;
 public class SpinPlacementMotors extends Command {
 
   private GroundIntake m_GroundIntake;
-
+  private boolean spinForwards;
+  private double spinModifier;
 
   /** Creates a new ManualPlacementGroundIntakeMotor. */
-  public SpinPlacementMotors(GroundIntake intake) {
+  public SpinPlacementMotors(GroundIntake intake, boolean spinFwd) {
     m_GroundIntake = intake;
+    spinForwards = spinFwd;
+    spinModifier = (spinForwards) ? 0.75 : -1.0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_GroundIntake);
   }
@@ -30,7 +33,7 @@ public class SpinPlacementMotors extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_GroundIntake.movePlacementMotor(-0.75);
+    m_GroundIntake.movePlacementMotor(0.75 * spinModifier);
   }
 
   // Called once the command ends or is interrupted.

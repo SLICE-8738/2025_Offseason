@@ -44,8 +44,8 @@ public class Button {
     public static Trigger cont2_buttonY = new JoystickButton(controller2, XboxController.Button.kY.value);
     public static Trigger cont2_leftBumper= new JoystickButton(controller2, 5);
     public static Trigger cont2_rightBumper = new JoystickButton(controller2, 6);
-    public static Trigger cont2_leftTrigger =  new Trigger(() -> {return controller1.getRawAxis(2) > 0.35; });
-    public static Trigger cont2_rightTrigger =  new Trigger(() -> {return controller1.getRawAxis(3) > 0.35; });
+    public static Trigger cont2_leftTrigger =  new Trigger(() -> {return controller2.getRawAxis(2) > 0.35; });
+    public static Trigger cont2_rightTrigger =  new Trigger(() -> {return controller2.getRawAxis(3) > 0.35; });
     public static Trigger cont2_minus = new JoystickButton(controller2, 7);
     public static Trigger cont2_plus = new JoystickButton(controller2, 8);
     public static Trigger cont2_leftStickClick = new JoystickButton(controller2, 9);
