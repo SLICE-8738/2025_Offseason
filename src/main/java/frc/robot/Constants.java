@@ -374,6 +374,12 @@ public final class Constants {
     public static final double VELOCITY_CONVERSION_FACTOR = POSITION_CONVERSION_FACTOR;
     public static final double SENSOR_TO_MECHANISM_RATIO = 49.5;//1 / 49.5;
 
+    /* ANGLES */
+    public static final double INTAKE_ANGLE = 0;
+    public static final double INDEX_ANGLE = 0;
+    public static final double STOW_ANGLE = 0;
+    public static final double MAX_ANGLE = 0; //TODO FIGURE OUT ANGLES OF GROUND INTAKE
+
     /* PID */
     public static final double KP = 1.0;
     public static final double KI = 0; // 0.01;

@@ -34,6 +34,7 @@ import frc.robot.commands.EndEffector.ManualFeedCommand;
 import frc.robot.commands.EndEffector.OutakeAlgae;
 import frc.robot.commands.EndEffector.ScoreCoral;
 import frc.robot.commands.GroundIntake.ManualRotateGroundIntake;
+import frc.robot.commands.GroundIntake.RotateGroundIntake;
 import frc.robot.commands.GroundIntake.SpinPlacementMotors;
 import frc.robot.commands.LEDs.CoralLEDs;
 import frc.robot.commands.Scoring.AlignAndGetAlgae;
@@ -154,6 +155,9 @@ public class RobotContainer {
   public final ManualRotateGroundIntake m_manualRotateGroundIntake;
   public final SpinPlacementMotors m_moveIntake;
   public final SpinPlacementMotors m_moveIntakeReversed;
+  public final RotateGroundIntake m_goToGroundIntakeAngleIntake;
+  public final RotateGroundIntake m_goToGroundIntakeAngleIndex;
+  public final RotateGroundIntake m_groundIntakeStow;
 
   /* LEDs */
   public final CoralLEDs m_coralLEDs;
@@ -280,6 +284,9 @@ public class RobotContainer {
     m_manualRotateGroundIntake = new ManualRotateGroundIntake(m_groundIntake, operatorController);
     m_moveIntake = new SpinPlacementMotors(m_groundIntake, true);
     m_moveIntakeReversed = new SpinPlacementMotors(m_groundIntake, false);
+    m_goToGroundIntakeAngleIndex = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.INDEX_ANGLE);
+    m_goToGroundIntakeAngleIntake = new  RotateGroundIntake(m_groundIntake, 2,Constants.kGroundIntake.INTAKE_ANGLE);
+    m_groundIntakeStow = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.STOW_ANGLE);
 
     /* Climber */
   //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
@@ -361,6 +368,12 @@ public class RobotContainer {
 
     Button.cont1_rightStickClick1.whileTrue(m_alignAndGetAlgae);
     Button.cont1_rightStickClick1.onFalse(m_clampAlgae);
+
+
+    /* Ground Intake */
+    Button.cont1_minus.onTrue(m_groundIntakeStow);
+    Button.cont1_controlPadLeft.onTrue(m_goToGroundIntakeAngleIndex);
+    Button.cont1_controlPadRight.onTrue(m_goToGroundIntakeAngleIntake);
 
     /* Scoring */
     Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, () -> (EndEffector.hasCoral() == true)));
