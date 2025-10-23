@@ -65,10 +65,13 @@ public class GroundIntake extends TalonFXPositionalSubsystem {
     intakeMotor.set(speed);
   }
 
+  //public boolean hasCoral(){
+  //}
+
   @Override
   public void periodic() {
     // This method will be called once per schedulerun
-    SmartDashboard.putNumber("Ground Intake Relative Angle", getPositions()[0]);
+    SmartDashboard.putNumber("Ground Intake Relative Angle", (getPositions()[0] * -1) - 4 );
 
     Logger.recordOutput("Ground Intake/Current Command", getCurrentCommand() == null ? "Nothing" : getCurrentCommand().getName());
   }

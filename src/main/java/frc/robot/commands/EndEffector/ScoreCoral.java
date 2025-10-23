@@ -71,7 +71,6 @@ public class ScoreCoral extends LoggedCommand {
   @Override
   public boolean isFinished() {
     if (!topBackSensor && !bottomBackSensor && !frontSensor) {
-      System.out.println("Coral out");
       return true;
     }
     return false;

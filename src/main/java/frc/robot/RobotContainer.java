@@ -375,6 +375,9 @@ public class RobotContainer {
     Button.cont1_controlPadLeft.onTrue(m_goToGroundIntakeAngleIndex);
     Button.cont1_controlPadRight.onTrue(m_goToGroundIntakeAngleIntake);
 
+    //Button.cont1_leftTrigger.onTrue();
+    //Button.cont1_leftBumper.onTrue();
+
     /* Scoring */
     Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, () -> (EndEffector.hasCoral() == true)));
     //Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
@@ -386,11 +389,6 @@ public class RobotContainer {
     //algaeIntakeTrigger.onFalse(null);
     //Button.cont1_leftTrigger.onTrue(); TODO Stow + Ground Intake
     
-    //Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
-    //    () -> (Elevator.getCoralLevel() == Level.LEVEL4)));
-    /*
-    Button.buttonB.onTrue(new ConditionalCommand(m_toAlgaeLower, m_toAlgaeHigher,
-        () -> (Elevator.getAlgaeLevel().height - m_elevator.getPositions()[0] < 0)));
 
     // ==================
     // Operator Controls
@@ -400,7 +398,7 @@ public class RobotContainer {
     Button.cont2_rightBumper.whileTrue(m_IntakeAlgae);
     Button.cont2_rightTrigger.onTrue(m_OutakeAlgae);
 
-    /* Intake */
+    /* Ground Intake */
     Button.cont2_leftBumper.whileTrue(m_moveIntake);
     Button.cont2_leftTrigger.whileTrue(m_moveIntakeReversed);
 

@@ -375,15 +375,16 @@ public final class Constants {
     public static final double SENSOR_TO_MECHANISM_RATIO = 49.5;//1 / 49.5;
 
     /* ANGLES */
-    public static final double INTAKE_ANGLE = 0;
-    public static final double INDEX_ANGLE = 0;
-    public static final double STOW_ANGLE = 0;
-    public static final double MAX_ANGLE = 0; //TODO FIGURE OUT ANGLES OF GROUND INTAKE
+    public static final double ANGLE_THRESHOLD = 2;
+    public static final double INTAKE_ANGLE = 175;
+    public static final double INDEX_ANGLE = 11;
+    public static final double STOW_ANGLE = 6.7;
+    public static final double MAX_ANGLE = 180; //TODO FIGURE OUT ANGLES OF GROUND INTAKE
 
     /* PID */
     public static final double KP = 1.0;
-    public static final double KI = 0; // 0.01;
-    public static final double KD = 0; // 0.1;
+    public static final double KI = 0.01;
+    public static final double KD = 0.1;
     
   }
 

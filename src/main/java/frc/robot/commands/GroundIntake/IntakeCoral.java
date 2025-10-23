@@ -5,35 +5,28 @@
 package frc.robot.commands.GroundIntake;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.subsystems.GroundIntake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class RotateGroundIntake extends Command {
+public class IntakeCoral extends Command {
 
   private GroundIntake m_groundIntake;
-  private double m_threshold;
-  private double m_degrees;
+  private RotateGroundIntake m_rotateGroundIntake;
+  private SpinPlacementMotors m_spinPlacementMotors;
 
-  /** Creates a new RotateGroundIntake. */
-  public RotateGroundIntake(GroundIntake groundIntake, double thresh, double deg) {
+  /** Creates a new IntakeCoral. */
+  public IntakeCoral(GroundIntake groundIntake, RotateGroundIntake rotateIntake, SpinPlacementMotors spinMotors) {
     m_groundIntake = groundIntake;
-    m_threshold = thresh;
+    m_rotateGroundIntake = rotateIntake;
+    m_spinPlacementMotors = spinMotors;
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_groundIntake);
-    if(deg > Constants.kGroundIntake.MAX_ANGLE){
-      m_degrees = Constants.kGroundIntake.MAX_ANGLE;
-    } else if(deg < 1){
-      m_degrees = 1;
-    } else{
-      m_degrees = deg;
-    }
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     super.initialize();
-    m_groundIntake.setPosition(m_degrees);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -49,6 +42,6 @@ public class RotateGroundIntake extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_groundIntake.getPositions()[0] > m_threshold - Constants.kGroundIntake.ANGLE_THRESHOLD && m_groundIntake.getPositions()[0] < m_threshold + Constants.kGroundIntake.ANGLE_THRESHOLD;
+    return false;
   }
 }
