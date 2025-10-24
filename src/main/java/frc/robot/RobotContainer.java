@@ -284,9 +284,9 @@ public class RobotContainer {
     m_manualRotateGroundIntake = new ManualRotateGroundIntake(m_groundIntake, operatorController);
     m_moveIntake = new SpinPlacementMotors(m_groundIntake, true);
     m_moveIntakeReversed = new SpinPlacementMotors(m_groundIntake, false);
-    m_goToGroundIntakeAngleIndex = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.INDEX_ANGLE);
-    m_goToGroundIntakeAngleIntake = new  RotateGroundIntake(m_groundIntake, 2,Constants.kGroundIntake.INTAKE_ANGLE);
-    m_groundIntakeStow = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.STOW_ANGLE);
+    m_goToGroundIntakeAngleIndex = new RotateGroundIntake(m_groundIntake, 10, Constants.kGroundIntake.INDEX_ANGLE);
+    m_goToGroundIntakeAngleIntake = new  RotateGroundIntake(m_groundIntake, 10,Constants.kGroundIntake.INTAKE_ANGLE);
+    m_groundIntakeStow = new RotateGroundIntake(m_groundIntake, 10, Constants.kGroundIntake.STOW_ANGLE);
 
     /* Climber */
   //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);

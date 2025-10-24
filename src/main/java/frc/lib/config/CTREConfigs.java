@@ -142,7 +142,7 @@ public final class CTREConfigs {
             elevatorFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.kElevator.CLOSED_LOOP_RAMP;
 
         /* ================================ */
-        /* Source Intake Motor Configuration */
+        /* GROUND Intake Motor Configuration */
         /* ================================ */
 
         /* Motor Invert and Neutral Mode */
