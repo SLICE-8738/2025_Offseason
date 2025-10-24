@@ -23,6 +23,7 @@ public class GroundIntake extends TalonFXPositionalSubsystem {
   private final TalonFX intakeMotor;
 
   private final CANrange coralDetector;
+  private boolean lastDetect;
 
   /** Creates a new GroundIntake. */
   public GroundIntake() {
@@ -40,6 +41,7 @@ public class GroundIntake extends TalonFXPositionalSubsystem {
 
     intakeMotor = new TalonFX(Constants.kGroundIntake.INTAKE_MOTOR);
     coralDetector = new CANrange(Constants.kGroundIntake.CAN_RANGE_ID);
+    lastDetect = false;
 
   }
 
@@ -65,8 +67,9 @@ public class GroundIntake extends TalonFXPositionalSubsystem {
     intakeMotor.set(speed);
   }
 
-  //public boolean hasCoral(){
-  //}
+  public boolean hasCoral(){
+    return coralDetector.getIsDetected().getValue();
+  }
 
   @Override
   public void periodic() {

@@ -11,14 +11,11 @@ import frc.robot.subsystems.GroundIntake;
 public class IntakeCoral extends Command {
 
   private GroundIntake m_groundIntake;
-  private RotateGroundIntake m_rotateGroundIntake;
-  private SpinPlacementMotors m_spinPlacementMotors;
+
 
   /** Creates a new IntakeCoral. */
-  public IntakeCoral(GroundIntake groundIntake, RotateGroundIntake rotateIntake, SpinPlacementMotors spinMotors) {
+  public IntakeCoral(GroundIntake groundIntake) {
     m_groundIntake = groundIntake;
-    m_rotateGroundIntake = rotateIntake;
-    m_spinPlacementMotors = spinMotors;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_groundIntake);
   }
@@ -31,17 +28,20 @@ public class IntakeCoral extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_groundIntake.movePlacementMotor(-.75);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_groundIntake.movePlacementMotor(0);
     super.end(interrupted);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_groundIntake.hasCoral();
   }
 }

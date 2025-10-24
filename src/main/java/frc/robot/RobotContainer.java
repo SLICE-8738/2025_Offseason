@@ -27,12 +27,16 @@ import frc.robot.commands.Elevator.ManualElevator;
 import frc.robot.commands.EndEffector.BargeAlgaeThrow;
 import frc.robot.commands.EndEffector.BumpAlgae;
 import frc.robot.commands.EndEffector.ClampAlgae;
+import frc.robot.commands.EndEffector.IndexCoralSequence;
 import frc.robot.commands.EndEffector.IndexSequence;
 import frc.robot.commands.EndEffector.IntakeAlgae;
 import frc.robot.commands.EndEffector.ManualEndEffector;
 import frc.robot.commands.EndEffector.ManualFeedCommand;
 import frc.robot.commands.EndEffector.OutakeAlgae;
 import frc.robot.commands.EndEffector.ScoreCoral;
+import frc.robot.commands.GroundIntake.IndexCoral;
+import frc.robot.commands.GroundIntake.IntakeCoral;
+import frc.robot.commands.GroundIntake.IntakeCoralSequence;
 import frc.robot.commands.GroundIntake.ManualRotateGroundIntake;
 import frc.robot.commands.GroundIntake.RotateGroundIntake;
 import frc.robot.commands.GroundIntake.SpinPlacementMotors;
@@ -126,6 +130,8 @@ public class RobotContainer {
   public final ProcessAlgae m_processAlgae;
   public final MoveToLevelParallel m_moveToLevelParallel;
 
+  public final IndexCoralSequence m_indexCoralSequence;
+
   /* Climber */
   //public final ManualClimberCommand m_manualClimb;
   //public final SequentialCommandGroup m_climb;
@@ -158,6 +164,9 @@ public class RobotContainer {
   public final RotateGroundIntake m_goToGroundIntakeAngleIntake;
   public final RotateGroundIntake m_goToGroundIntakeAngleIndex;
   public final RotateGroundIntake m_groundIntakeStow;
+  public final IntakeCoral m_intakeCoral;
+  public final IndexCoral m_indexCoralGroudIntakeCommand;
+  public final IntakeCoralSequence m_intakeCoralSequence;
 
   /* LEDs */
   public final CoralLEDs m_coralLEDs;
@@ -260,6 +269,9 @@ public class RobotContainer {
     m_processAlgae = new ProcessAlgae(m_endEffector, m_elevator);
     m_moveToLevelParallel = new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL);
 
+    m_indexCoralSequence = new IndexCoralSequence(m_endEffector, m_elevator, m_groundIntake);
+    m_intakeCoralSequence = new IntakeCoralSequence(m_groundIntake);
+
     /* End Effector */
     m_indexCoral = new IndexSequence(m_endEffector, m_elevator, operatorController);
     m_bumpAlgae = new BumpAlgae(m_endEffector);
@@ -287,6 +299,8 @@ public class RobotContainer {
     m_goToGroundIntakeAngleIndex = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.INDEX_ANGLE);
     m_goToGroundIntakeAngleIntake = new  RotateGroundIntake(m_groundIntake, 2,Constants.kGroundIntake.INTAKE_ANGLE);
     m_groundIntakeStow = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.STOW_ANGLE);
+    m_intakeCoral = new IntakeCoral(m_groundIntake);
+    m_indexCoralGroudIntakeCommand = new IndexCoral(m_groundIntake);
 
     /* Climber */
   //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
@@ -375,11 +389,14 @@ public class RobotContainer {
     Button.cont1_controlPadLeft.onTrue(m_goToGroundIntakeAngleIndex);
     Button.cont1_controlPadRight.onTrue(m_goToGroundIntakeAngleIntake);
 
-    //Button.cont1_leftTrigger.onTrue();
+    // TODO TESTING PURPOSES
+    Button.cont1_leftTrigger.onTrue(m_intakeCoralSequence);
+    Button.cont1_leftBumper.onTrue(m_indexCoralSequence);
     //Button.cont1_leftBumper.onTrue();
 
     /* Scoring */
-    Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, () -> (EndEffector.hasCoral() == true)));
+    Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, 
+    () -> (EndEffector.hasCoral() == true)));
     //Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
     //Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);
 
