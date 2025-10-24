@@ -29,7 +29,7 @@ public class IntakeCoral extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_groundIntake.movePlacementMotor(-.75);
+    m_groundIntake.movePlacementMotor(-.5);
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +42,6 @@ public class IntakeCoral extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_groundIntake.hasCoral();
+    return !m_groundIntake.hasCoral();
   }
 }

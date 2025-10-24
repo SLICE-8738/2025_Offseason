@@ -296,9 +296,9 @@ public class RobotContainer {
     m_manualRotateGroundIntake = new ManualRotateGroundIntake(m_groundIntake, operatorController);
     m_moveIntake = new SpinPlacementMotors(m_groundIntake, true);
     m_moveIntakeReversed = new SpinPlacementMotors(m_groundIntake, false);
-    m_goToGroundIntakeAngleIndex = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.INDEX_ANGLE);
-    m_goToGroundIntakeAngleIntake = new  RotateGroundIntake(m_groundIntake, 2,Constants.kGroundIntake.INTAKE_ANGLE);
-    m_groundIntakeStow = new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.STOW_ANGLE);
+    m_goToGroundIntakeAngleIndex = new RotateGroundIntake(m_groundIntake, 1.75, Constants.kGroundIntake.INDEX_ANGLE);
+    m_goToGroundIntakeAngleIntake = new  RotateGroundIntake(m_groundIntake, 1.75, Constants.kGroundIntake.INTAKE_ANGLE);
+    m_groundIntakeStow = new RotateGroundIntake(m_groundIntake, 1.75, Constants.kGroundIntake.STOW_ANGLE);
     m_intakeCoral = new IntakeCoral(m_groundIntake);
     m_indexCoralGroudIntakeCommand = new IndexCoral(m_groundIntake);
 
@@ -389,13 +389,11 @@ public class RobotContainer {
     Button.cont1_controlPadLeft.onTrue(m_goToGroundIntakeAngleIndex);
     Button.cont1_controlPadRight.onTrue(m_goToGroundIntakeAngleIntake);
 
-    // TODO TESTING PURPOSES
     Button.cont1_leftTrigger.onTrue(m_intakeCoralSequence);
     Button.cont1_leftBumper.onTrue(m_indexCoralSequence);
-    //Button.cont1_leftBumper.onTrue();
 
     /* Scoring */
-    Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_scoreCoral, m_bargeAlgaeThrow, 
+    Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_alignAndScoreCoral, m_bargeAlgaeThrow, 
     () -> (EndEffector.hasCoral() == true)));
     //Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
     //Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);

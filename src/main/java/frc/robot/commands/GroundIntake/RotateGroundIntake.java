@@ -19,18 +19,23 @@ public class RotateGroundIntake extends Command {
   public RotateGroundIntake(GroundIntake groundIntake, double thresh, double deg) {
     m_groundIntake = groundIntake;
     m_threshold = thresh;
-    addRequirements(m_groundIntake);
+    //addRequirements(m_groundIntake);
+    /*
     if(deg > Constants.kGroundIntake.MAX_ANGLE){
       m_degrees = Constants.kGroundIntake.MAX_ANGLE;
     } 
+    */
     /*
     else if(deg < 1){
       m_degrees = 1;
     } 
     */
+    /*
     else{
       m_degrees = deg;
     }
+    */
+    m_degrees = deg;
   }
 
   // Called when the command is initially scheduled.
