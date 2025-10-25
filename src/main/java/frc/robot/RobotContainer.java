@@ -390,7 +390,7 @@ public class RobotContainer {
     /* Scoring */
     Button.cont1_rightTrigger.onTrue(m_scoreCoral);
     Button.cont1_rightBumper.whileTrue(new ConditionalCommand(m_alignAndScoreCoral, m_bargeAlgaeThrow, 
-    () -> (EndEffector.hasCoral() == true)));
+    () -> (EndEffector.hasCoral())));
     
 
     // ==================
@@ -404,8 +404,7 @@ public class RobotContainer {
     /* Ground Intake */
     Button.cont2_leftBumper.whileTrue(m_moveIntake);
     Button.cont2_leftTrigger.whileTrue(m_moveIntakeReversed);
-    Button.cont2_minus.onTrue(new InstantCommand(
-        () -> m_sourceIntake.setEncoderPosition(0), m_sourceIntake));
+    Button.cont2_minus.onTrue(m_groundIntakeStow);
 
 
     /* Elevator */
@@ -414,8 +413,11 @@ public class RobotContainer {
     Button.cont2_buttonY.onTrue(m_bargeAlgae);
 
 
+    /*
     Button.cont2_plus.onTrue(new InstantCommand(
         () -> m_elevator.setEncoderPosition(0), m_elevator));
+    */
+    Button.cont2_plus.onTrue(m_elevatorToStow);
 
 
     /* Scoring */

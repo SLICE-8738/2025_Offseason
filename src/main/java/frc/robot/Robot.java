@@ -7,6 +7,8 @@ package frc.robot;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 
+import edu.wpi.first.net.WebServer;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 
@@ -66,6 +68,8 @@ public class Robot extends LoggedRobot {
     m_robotContainer = new RobotContainer();
 
     PathfindingCommand.warmupCommand().schedule();
+
+    WebServer.start(5800, Filesystem.getDeployDirectory().getPath());
   }
 
   /**

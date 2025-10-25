@@ -16,7 +16,7 @@ public class IntakeCoralSequence extends SequentialCommandGroup {
   public IntakeCoralSequence(GroundIntake groundIntake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new RotateGroundIntake(groundIntake, 2, Constants.kGroundIntake.INTAKE_ANGLE),
+    addCommands(new RotateGroundIntake(groundIntake, 2, Constants.kGroundIntake.INTAKE_ANGLE).withTimeout(3),
     new IntakeCoral(groundIntake));
   }
 }

@@ -107,6 +107,7 @@ public class ShuffleboardData {
         driverTab.addCamera("Right Limelight", "limelight-right-1", "http://10.87.38.202").
         withPosition(9, 1).
         withSize(3, 3);
+        driverTab.addCamera("Back Limelight", "limelight-back", "http://10.87.38.204");
 
         debugTab.add("SysID Routine", drivetrain.sysIDChooser);
 

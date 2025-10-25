@@ -17,7 +17,7 @@ public class IntakeCoral extends Command {
   public IntakeCoral(GroundIntake groundIntake) {
     m_groundIntake = groundIntake;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_groundIntake);
+    //addRequirements(m_groundIntake);
   }
 
   // Called when the command is initially scheduled.
@@ -35,6 +35,7 @@ public class IntakeCoral extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("Intake Command Ended");
     m_groundIntake.movePlacementMotor(0);
     super.end(interrupted);
   }

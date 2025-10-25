@@ -367,7 +367,7 @@ public final class Constants {
 
     public static final int ROTATION_MOTOR = 13;
     public static final int INTAKE_MOTOR = 14;
-    public static final int CAN_RANGE_ID = 0; // TODO find ID number
+    public static final int CAN_RANGE_ID = 0; 
 
     /* Conversion Factors */
     public static final double POSITION_CONVERSION_FACTOR = 360.0;
@@ -377,9 +377,9 @@ public final class Constants {
     /* ANGLES */
     public static final double ANGLE_THRESHOLD = 2;
     public static final double INTAKE_ANGLE = -195;
-    public static final double INDEX_ANGLE = -15;
+    public static final double INDEX_ANGLE = -10;
     public static final double STOW_ANGLE = -10;
-    //public static final double MAX_ANGLE = -180; //TODO FIGURE OUT ANGLES OF GROUND INTAKE
+    //public static final double MAX_ANGLE = -180;
 
     /* PID */
     public static final double KP = 1.0;
