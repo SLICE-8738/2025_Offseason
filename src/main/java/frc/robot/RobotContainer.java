@@ -361,11 +361,6 @@ public class RobotContainer {
     Button.cont1_controlPadUp.onTrue(m_resetFieldOrientedHeading);
     Button.cont1_leftStickClick1.whileTrue(m_swerveDriveClosedLoopSlowMode);
 
-    //Button.controlPadLeft1.whileTrue(m_sysIDDriveRoutine);
-    //Button.leftTrigger1.whileTrue(m_alignAndScoreCoral);
-    //Button.buttonX.whileTrue(m_alignAndGetAlgae);
-    //Button.buttonA.whileTrue(m_alignAndGetCoral);
-
     
     
 
@@ -393,16 +388,9 @@ public class RobotContainer {
     Button.cont1_leftBumper.onTrue(m_indexCoralSequence);
 
     /* Scoring */
-    Button.cont1_rightTrigger.onTrue(new ConditionalCommand(m_alignAndScoreCoral, m_bargeAlgaeThrow, 
+    Button.cont1_rightTrigger.onTrue(m_scoreCoral);
+    Button.cont1_rightBumper.whileTrue(new ConditionalCommand(m_alignAndScoreCoral, m_bargeAlgaeThrow, 
     () -> (EndEffector.hasCoral() == true)));
-    //Button.cont1_leftBumper.onTrue(m_alignAndGetAlgae);
-    //Button.cont1_rightBumper.onTrue(m_alignAndGetAlgae);
-
- 
-    /* TODO */
-    //algaeIntakeTrigger.onTrue(null);
-    //algaeIntakeTrigger.onFalse(null);
-    //Button.cont1_leftTrigger.onTrue(); TODO Stow + Ground Intake
     
 
     // ==================
@@ -416,10 +404,8 @@ public class RobotContainer {
     /* Ground Intake */
     Button.cont2_leftBumper.whileTrue(m_moveIntake);
     Button.cont2_leftTrigger.whileTrue(m_moveIntakeReversed);
-
-    // Todo implement later
-    //Button.cont2_minus.onTrue(new InstantCommand(
-    //    () -> m_sourceIntake.setEncoderPosition(0), m_sourceIntake));
+    Button.cont2_minus.onTrue(new InstantCommand(
+        () -> m_sourceIntake.setEncoderPosition(0), m_sourceIntake));
 
 
     /* Elevator */
@@ -451,9 +437,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-        new ResetRelativeEncoders(m_endEffector, m_sourceIntake),
+        new ResetRelativeEncoders(m_endEffector, m_groundIntake),
         new ParallelCommandGroup(
-          new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.INTAKE_ANGLE),
+          new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.STOW_ANGLE),
           m_autoSelector.getAutoCommand()));
   }
 

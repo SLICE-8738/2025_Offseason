@@ -6,18 +6,19 @@ package frc.robot.commands.Scoring;
 
 import frc.lib.commands.LoggedCommand;
 import frc.robot.subsystems.EndEffector;
+import frc.robot.subsystems.GroundIntake;
 import frc.robot.subsystems.SourceIntake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ResetRelativeEncoders extends LoggedCommand {
   /** Creates a new ResetRelativeEncoders. */
   private EndEffector m_endEffector;
-  private SourceIntake m_sourceIntake;
+  private GroundIntake m_groundIntake;
 
-  public ResetRelativeEncoders(EndEffector endEffector, SourceIntake sourceIntake) {
+  public ResetRelativeEncoders(EndEffector endEffector, GroundIntake sourceIntake) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_endEffector = endEffector;
-    m_sourceIntake = sourceIntake;
+    m_groundIntake = sourceIntake;
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +26,7 @@ public class ResetRelativeEncoders extends LoggedCommand {
   public void initialize() {
     super.initialize();
     m_endEffector.resetRelativeEncoder();
-    m_sourceIntake.resetRelativeEncoder();
+    m_groundIntake.resetRelativeEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

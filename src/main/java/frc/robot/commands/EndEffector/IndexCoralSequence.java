@@ -25,10 +25,11 @@ import frc.robot.subsystems.GroundIntake;
 public class IndexCoralSequence extends SequentialCommandGroup {
   /** Creates a new IndexCoralSequence. */
   public IndexCoralSequence(EndEffector endEffector, Elevator elevator, GroundIntake groundIntake) {
+    addRequirements(elevator);
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new ParallelCommandGroup(new ToStow(endEffector, elevator),
     new RotateGroundIntake(groundIntake, 2, frc.robot.Constants.kGroundIntake.INDEX_ANGLE)),
-    new IndexCoral(groundIntake) );
+    new ParallelCommandGroup(new IndexCoral(groundIntake).withTimeout(2.5), new IndexAlignCommand(endEffector)));
   }
 }
