@@ -171,12 +171,11 @@ public class EndEffector extends TalonFXPositionalSubsystem {
 
   public static boolean hasCoral(){
     boolean[] sensors = checkSensorsIndexing();
-    boolean middleSensor = sensors[1];
     boolean frontSensor = sensors[0];
-
+    boolean middleSensor = sensors[1];
+    
     return !middleSensor && !frontSensor;
   }
-  
 
   public static boolean[] checkSensorsIndexing() {
     boolean[] sensorStatuses = new boolean[4];

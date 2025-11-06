@@ -249,9 +249,9 @@ public final class Constants {
     /* Elevator Levels */
     public enum Level {
 
-      STOW(0.01, 90, "Stow"),
+      STOW(0.075, 90, "Stow"),
       PROCESSER(0.03, 0, "Processer"),
-      SOURCE(0.015, 70, "Source"),
+      SOURCE(0.025, 70, "Source"),
       LEVEL1(0.20, 90, "Level 1"),
       LEVEL1B(.25, 90, "Level 1B"),
       ALGAE1(0.37, 16, "Algae 1"),

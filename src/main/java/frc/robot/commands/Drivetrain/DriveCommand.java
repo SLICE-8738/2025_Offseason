@@ -69,14 +69,14 @@ public class DriveCommand extends Command {
 
     double[] translation = translationFilter.filter(-m_driverController.getRawAxis(1), -m_driverController.getRawAxis(0));
 
-    double multipler = Button.cont1_leftBumper.getAsBoolean() ? 0.33 : 1;
+    double multipler = Button.leftBumper1.getAsBoolean() ? 0.33 : 1;
 
     double translationX = translation[0] * Constants.kDrivetrain.MAX_LINEAR_VELOCITY * multipler;
     double translationY = translation[1] * Constants.kDrivetrain.MAX_LINEAR_VELOCITY * multipler;
 
     double rotationFF = rotationFilter.filter(-m_driverController.getRawAxis(4), 0)[0] * Constants.kDrivetrain.MAX_ANGULAR_VELOCITY * multipler;
 
-    m_isFieldRelative = !Button.cont1_rightBumper.getAsBoolean();
+    m_isFieldRelative = !Button.rightBumper1.getAsBoolean();
 
     if (!m_isFieldRelative) {
       translationX *= -0.5;
@@ -84,13 +84,7 @@ public class DriveCommand extends Command {
       rotationFF *= 0.5;
     }
 
-    if(m_isSlowMode == true){
-      m_drivetrain.drive(
-        new Transform2d(translationX / 2, translationY / 2, new Rotation2d(rotationFF / 2)),
-        m_isOpenLoop,
-        m_isFieldRelative);
-    } else{
-      m_drivetrain.drive(
+    m_drivetrain.drive(
         new Transform2d(translationX, translationY, new Rotation2d(rotationFF)),
         m_isOpenLoop,
         m_isFieldRelative);

@@ -65,7 +65,7 @@ public class AutoSelector {
 
     private final Map<String, Pose2d> autoPoses = new HashMap<String, Pose2d>();
 
-    public AutoSelector(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector, SourceIntake sourceIntake) {
+    public AutoSelector(Drivetrain drivetrain, Elevator elevator, EndEffector endEffector) {
 
         routineChooser = new SendableChooser<Routine>();
 

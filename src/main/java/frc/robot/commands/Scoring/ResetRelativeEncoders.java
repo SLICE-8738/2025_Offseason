@@ -13,12 +13,12 @@ import frc.robot.subsystems.SourceIntake;
 public class ResetRelativeEncoders extends LoggedCommand {
   /** Creates a new ResetRelativeEncoders. */
   private EndEffector m_endEffector;
-  private GroundIntake m_groundIntake;
+  //private SourceIntake m_sourceIntake;
 
-  public ResetRelativeEncoders(EndEffector endEffector, GroundIntake sourceIntake) {
+  public ResetRelativeEncoders(EndEffector endEffector /*,SourceIntake sourceIntake*/) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_endEffector = endEffector;
-    m_groundIntake = sourceIntake;
+    //m_sourceIntake = sourceIntake;
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +26,7 @@ public class ResetRelativeEncoders extends LoggedCommand {
   public void initialize() {
     super.initialize();
     m_endEffector.resetRelativeEncoder();
-    m_groundIntake.resetRelativeEncoder();
+    //m_sourceIntake.resetRelativeEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

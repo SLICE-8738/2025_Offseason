@@ -27,19 +27,12 @@ import frc.robot.commands.Elevator.ManualElevator;
 import frc.robot.commands.EndEffector.BargeAlgaeThrow;
 import frc.robot.commands.EndEffector.BumpAlgae;
 import frc.robot.commands.EndEffector.ClampAlgae;
-import frc.robot.commands.EndEffector.IndexCoralSequence;
 import frc.robot.commands.EndEffector.IndexSequence;
 import frc.robot.commands.EndEffector.IntakeAlgae;
 import frc.robot.commands.EndEffector.ManualEndEffector;
 import frc.robot.commands.EndEffector.ManualFeedCommand;
 import frc.robot.commands.EndEffector.OutakeAlgae;
 import frc.robot.commands.EndEffector.ScoreCoral;
-import frc.robot.commands.GroundIntake.IndexCoral;
-import frc.robot.commands.GroundIntake.IntakeCoral;
-import frc.robot.commands.GroundIntake.IntakeCoralSequence;
-import frc.robot.commands.GroundIntake.ManualRotateGroundIntake;
-import frc.robot.commands.GroundIntake.RotateGroundIntake;
-import frc.robot.commands.GroundIntake.SpinPlacementMotors;
 import frc.robot.commands.LEDs.CoralLEDs;
 import frc.robot.commands.Scoring.AlignAndGetAlgae;
 import frc.robot.commands.Scoring.AlignAndGetCoral;
@@ -57,7 +50,6 @@ import frc.robot.commands.SourceIntake.ManualRotateSourceIntake;
 import frc.robot.commands.SourceIntake.RotateSourceIntake;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
-import frc.robot.subsystems.GroundIntake;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.SourceIntake;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -88,9 +80,9 @@ public class RobotContainer {
   //public final Climber m_climber;
   public final Elevator m_elevator;
   public final EndEffector m_endEffector;
-  public final SourceIntake m_sourceIntake;
+  //public final SourceIntake m_sourceIntake;
   public final LEDs m_leds;
-  public final GroundIntake m_groundIntake;
+  //public final GroundIntake m_groundIntake;
 
   public final AutoSelector m_autoSelector;
   public final ReefPositionSelector m_reefPositionSelector;
@@ -103,7 +95,7 @@ public class RobotContainer {
   /* Drivetrain */
   public final DriveCommand m_swerveDriveOpenLoop;
   public final DriveCommand m_swerveDriveClosedLoop;
-  public final DriveCommand m_swerveDriveClosedLoopSlowMode;
+  //public final DriveCommand m_swerveDriveClosedLoopSlowMode;
   public final RunDutyCycle m_setDrivePercentOutput;
   public final ResetFieldOrientedHeading m_resetFieldOrientedHeading;
   public final Command m_sysIDDriveRoutine;
@@ -125,12 +117,12 @@ public class RobotContainer {
   public final ToAlgae m_toAlgaeLower;
   public final ToStow m_elevatorToStow;
   public final ToStow m_elevatorEmergencyStow;
-  public final IntakeAdjustment m_intakeAdjustment;
+  //public final IntakeAdjustment m_intakeAdjustment;
   public final BargeAlgae m_bargeAlgae;
   public final ProcessAlgae m_processAlgae;
   public final MoveToLevelParallel m_moveToLevelParallel;
 
-  public final IndexCoralSequence m_indexCoralSequence;
+  //public final IndexCoralSequence m_indexCoralSequence;
 
   /* Climber */
   //public final ManualClimberCommand m_manualClimb;
@@ -153,28 +145,17 @@ public class RobotContainer {
   public final BargeAlgaeThrow m_bargeAlgaeThrow;
 
   /* Source Intake */
-  public final ManualRotateSourceIntake m_manualSourceIntake;
-  public final RotateSourceIntake m_goToSourceIntakeAngle1;
-  public final RotateSourceIntake m_goToSourceIntakeAngle2;
-
-  /* Ground Intake */
-  public final ManualRotateGroundIntake m_manualRotateGroundIntake;
-  public final SpinPlacementMotors m_moveIntake;
-  public final SpinPlacementMotors m_moveIntakeReversed;
-  public final RotateGroundIntake m_goToGroundIntakeAngleIntake;
-  public final RotateGroundIntake m_goToGroundIntakeAngleIndex;
-  public final RotateGroundIntake m_groundIntakeStow;
-  public final IntakeCoral m_intakeCoral;
-  public final IndexCoral m_indexCoralGroudIntakeCommand;
-  public final IntakeCoralSequence m_intakeCoralSequence;
+  //public final ManualRotateSourceIntake m_manualSourceIntake;
+  //public final RotateSourceIntake m_goToSourceIntakeAngle1;
+  //public final RotateSourceIntake m_goToSourceIntakeAngle2;
 
   /* LEDs */
   public final CoralLEDs m_coralLEDs;
 
   /* Triggers */
   public final Trigger robotTipping;
-  public final Trigger slowModeTrigger;
-  public final Trigger algaeIntakeTrigger;
+  //public final Trigger slowModeTrigger;
+  //public final Trigger algaeIntakeTrigger;
 
   /* Tests */
   public final DrivetrainTest m_drivetrainTest;
@@ -220,12 +201,11 @@ public class RobotContainer {
 
     m_endEffector = new EndEffector();
     m_elevator = new Elevator();
-    m_sourceIntake = new SourceIntake();
-    m_groundIntake = new GroundIntake();
+    //m_sourceIntake = new SourceIntake();
     //m_climber = new Climber();
     m_leds = new LEDs();
 
-    m_autoSelector = new AutoSelector(m_drivetrain, m_elevator, m_endEffector, m_sourceIntake);
+    m_autoSelector = new AutoSelector(m_drivetrain, m_elevator, m_endEffector/*, m_sourceIntake*/);
     m_reefPositionSelector = new ReefPositionSelector();
     m_shuffleboardData = new ShuffleboardData(m_drivetrain, m_endEffector, m_autoSelector);
 
@@ -236,7 +216,6 @@ public class RobotContainer {
     /* Drivetrain */
     m_swerveDriveOpenLoop = new DriveCommand(m_drivetrain, driverController, true, false);
     m_swerveDriveClosedLoop = new DriveCommand(m_drivetrain, driverController, false, false);
-    m_swerveDriveClosedLoopSlowMode = new DriveCommand(m_drivetrain, driverController, false, true);
     m_setDrivePercentOutput = new RunDutyCycle(m_drivetrain, 0.10, 0);
     m_resetFieldOrientedHeading = new ResetFieldOrientedHeading(m_drivetrain);
     m_sysIDDriveRoutine = new DeferredCommand(m_drivetrain::getSysIDDriveRoutine, Set.of(m_drivetrain));
@@ -255,7 +234,7 @@ public class RobotContainer {
     m_elevatorEmergencyStow = new ToStow(m_endEffector, m_elevator);
     m_toAlgaeHigher = new ToAlgae(m_elevator, m_endEffector);
     m_toAlgaeLower = new ToAlgae(m_elevator, m_endEffector);
-    m_intakeAdjustment = new IntakeAdjustment(m_endEffector, m_sourceIntake);
+    //m_intakeAdjustment = new IntakeAdjustment(m_endEffector, m_sourceIntake);
     m_alignAndScoreCoral = new DeferredCommand(
       () -> new AlignAndScoreCoral(m_drivetrain, m_elevator, m_endEffector),
       Set.of(m_drivetrain));
@@ -269,8 +248,8 @@ public class RobotContainer {
     m_processAlgae = new ProcessAlgae(m_endEffector, m_elevator);
     m_moveToLevelParallel = new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL);
 
-    m_indexCoralSequence = new IndexCoralSequence(m_endEffector, m_elevator, m_groundIntake);
-    m_intakeCoralSequence = new IntakeCoralSequence(m_groundIntake);
+    //m_indexCoralSequence = new IndexCoralSequence(m_endEffector, m_elevator, m_groundIntake);
+    //m_intakeCoralSequence = new IntakeCoralSequence(m_groundIntake);
 
     /* End Effector */
     m_indexCoral = new IndexSequence(m_endEffector, m_elevator, operatorController);
@@ -288,19 +267,9 @@ public class RobotContainer {
     m_manualElevator = new ManualElevator(m_elevator, operatorController);
 
     /* Source Intake */
-    m_manualSourceIntake = new ManualRotateSourceIntake(m_sourceIntake, operatorController);
-    m_goToSourceIntakeAngle1 = new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.INTAKE_ANGLE);
-    m_goToSourceIntakeAngle2 = new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.CLIMB_ANGLE);
-
-    /* Ground Intake */
-    m_manualRotateGroundIntake = new ManualRotateGroundIntake(m_groundIntake, operatorController);
-    m_moveIntake = new SpinPlacementMotors(m_groundIntake, true);
-    m_moveIntakeReversed = new SpinPlacementMotors(m_groundIntake, false);
-    m_goToGroundIntakeAngleIndex = new RotateGroundIntake(m_groundIntake, 1.75, Constants.kGroundIntake.INDEX_ANGLE);
-    m_goToGroundIntakeAngleIntake = new  RotateGroundIntake(m_groundIntake, 1.75, Constants.kGroundIntake.INTAKE_ANGLE);
-    m_groundIntakeStow = new RotateGroundIntake(m_groundIntake, 1.75, Constants.kGroundIntake.STOW_ANGLE);
-    m_intakeCoral = new IntakeCoral(m_groundIntake);
-    m_indexCoralGroudIntakeCommand = new IndexCoral(m_groundIntake);
+    //m_manualSourceIntake = new ManualRotateSourceIntake(m_sourceIntake, operatorController);
+    //m_goToSourceIntakeAngle1 = new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.INTAKE_ANGLE);
+    //m_goToSourceIntakeAngle2 = new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.CLIMB_ANGLE);
 
     /* Climber */
   //  m_manualClimb = new ManualClimberCommand(m_climber, Button.controller2);
@@ -319,8 +288,8 @@ public class RobotContainer {
 
     /* Triggers */
     robotTipping = new Trigger(() -> m_drivetrain.getRoll() > 20 || m_drivetrain.getPitch() > 20);
-    slowModeTrigger = new Trigger(() -> Button.cont1_leftBumper.getAsBoolean() && Button.cont1_rightBumper.getAsBoolean());
-    algaeIntakeTrigger = new Trigger(() -> Button.cont1_leftTrigger.getAsBoolean() && Button.cont1_rightTrigger.getAsBoolean());
+    //slowModeTrigger = new Trigger(() -> Button.cont1_leftBumper.getAsBoolean() && Button.cont1_rightBumper.getAsBoolean());
+    //algaeIntakeTrigger = new Trigger(() -> Button.cont1_leftTrigger.getAsBoolean() && Button.cont1_rightTrigger.getAsBoolean());
 
     // Configure the trigger bindings
     configureBindings();
@@ -329,7 +298,6 @@ public class RobotContainer {
     // m_climber.setDefaultCommand(m_manualClimb);
     m_endEffector.setDefaultCommand(m_manualEndEffector);
     m_elevator.setDefaultCommand(m_manualElevator);
-    m_groundIntake.setDefaultCommand(m_manualRotateGroundIntake);
     //m_sourceIntake.setDefaultCommand(m_manualSourceIntake);
     m_leds.setDefaultCommand(m_coralLEDs);
 
@@ -358,14 +326,15 @@ public class RobotContainer {
 
     /* Drivetrain */
 
-    Button.cont1_controlPadUp.onTrue(m_resetFieldOrientedHeading);
-    Button.cont1_leftStickClick1.whileTrue(m_swerveDriveClosedLoopSlowMode);
+    //Button.cont1_controlPadUp.onTrue(m_resetFieldOrientedHeading);
+    //Button.cont1_leftStickClick1.whileTrue(m_swerveDriveClosedLoopSlowMode);
 
     
     
 
     /* Elevator */
-    Button.cont1_plus.onTrue(m_elevatorToStow);
+    //Button.cont1_plus.onTrue(m_elevatorToStow);
+    /* 
     Button.cont1_buttonA.onTrue(new ConditionalCommand(m_setLevelOne.andThen(new MoveToLevelParallel(m_elevator, m_endEffector, LevelType.CORAL)),
     m_processAlgae, () -> (EndEffector.hasCoral() == true)));
     Button.cont1_buttonB.onTrue(new ConditionalCommand(new SequentialCommandGroup(m_setUpperAlgae, m_toAlgaeHigher), 
@@ -380,6 +349,8 @@ public class RobotContainer {
 
 
     /* Ground Intake */
+
+    /*
     Button.cont1_minus.onTrue(m_groundIntakeStow);
     Button.cont1_controlPadLeft.onTrue(m_goToGroundIntakeAngleIndex);
     Button.cont1_controlPadRight.onTrue(m_goToGroundIntakeAngleIntake);
@@ -388,37 +359,41 @@ public class RobotContainer {
     Button.cont1_leftBumper.onTrue(m_indexCoralSequence);
 
     /* Scoring */
-    Button.cont1_rightTrigger.onTrue(m_scoreCoral);
-    Button.cont1_rightBumper.whileTrue(new ConditionalCommand(m_alignAndScoreCoral, m_bargeAlgaeThrow, 
-    () -> (EndEffector.hasCoral())));
-    
+    Button.rightBumper1.onTrue(new ConditionalCommand(m_moveUpToLevel, m_moveToLevelParallel,
+        () -> (Elevator.getCoralLevel() == Level.LEVEL4)));
+
+    Button.buttonB.onTrue(new ConditionalCommand(m_toAlgaeLower, m_toAlgaeHigher,
+        () -> (Elevator.getAlgaeLevel().height - m_elevator.getPositions()[0] < 0)));
+    Button.buttonY.onTrue(m_clampAlgae);
+
+    //Button.buttonA.onTrue(m_goToSourceIntakeAngle1);
+    Button.buttonA.onTrue(m_indexCoral);
+    Button.rightTrigger1.onTrue(m_scoreCoral);
 
     // ==================
     // Operator Controls
     // ==================
 
     /* End Effector */
-    Button.cont2_rightBumper.whileTrue(m_IntakeAlgae);
-    Button.cont2_rightTrigger.onTrue(m_OutakeAlgae);
-
-    /* Ground Intake */
-    Button.cont2_leftBumper.whileTrue(m_moveIntake);
-    Button.cont2_leftTrigger.whileTrue(m_moveIntakeReversed);
-    Button.cont2_minus.onTrue(m_groundIntakeStow);
-
+    //Button.buttonY2.onTrue(m_intakeAdjustment);
+    //Button.buttonY2.onFalse(m_goToSourceIntakeAngle1);
+    Button.buttonY2.onFalse(m_indexCoral);
 
     /* Elevator */
-    
-    Button.cont2_rightStickClick.onTrue(m_elevatorToStow);
-    Button.cont2_buttonY.onTrue(m_bargeAlgae);
+    Button.controlPadDown2.onTrue(new SetLevel(Level.LEVEL1, LevelType.CORAL));
+    Button.back.onTrue(m_setLevelOneB);
+    Button.controlPadLeft2.onTrue(new SetLevel(Level.LEVEL2, LevelType.CORAL));
+    Button.controlPadRight2.onTrue(new SetLevel(Level.LEVEL3, LevelType.CORAL));
+    Button.controlPadUp2.onTrue(new SetLevel(Level.LEVEL4, LevelType.CORAL));
+    Button.buttonX2.onTrue(m_elevatorToStow);
 
-
-    /*
-    Button.cont2_plus.onTrue(new InstantCommand(
+    Button.start.onTrue(new InstantCommand(
         () -> m_elevator.setEncoderPosition(0), m_elevator));
-    */
-    Button.cont2_plus.onTrue(m_elevatorToStow);
+    
+    //Button.cont2_plus.onTrue(m_elevatorToStow);
 
+    Button.buttonA2.whileTrue(m_manualFeed);
+    //Button.buttonB2.onTrue(m_goToSourceIntakeAngle2);
 
     /* Scoring */
     
@@ -439,9 +414,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-        new ResetRelativeEncoders(m_endEffector, m_groundIntake),
+        new ResetRelativeEncoders(m_endEffector),
         new ParallelCommandGroup(
-          new RotateGroundIntake(m_groundIntake, 2, Constants.kGroundIntake.STOW_ANGLE),
+          /*new RotateSourceIntake(m_sourceIntake, 2, Constants.kSourceIntake.INTAKE_ANGLE),*/
           m_autoSelector.getAutoCommand()));
   }
 
